@@ -2,7 +2,7 @@ local client = nil
 
 function run(message, content)
 
-    print("pong")
+    print("    reply: pong")
     message.channel:sendMessage('pong')
     client:emit('messageFinished')
 end
@@ -10,7 +10,10 @@ end
 function init(cl)
     client = cl
 
-    return{run = run}
+    return {
+        run = run,
+        ['isOn'] = false
+    }
 end
 
 return{init = init}

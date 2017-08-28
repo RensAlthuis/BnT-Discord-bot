@@ -47,7 +47,10 @@ function init(cl)
     client:on('updatemessages', updateMessages)
 
     timer.setInterval(1000, timerCallback)
-    return { run = run }
+    return {
+        run = run,
+        ['isOn'] = false
+    }
 end
 
 return { init = init }

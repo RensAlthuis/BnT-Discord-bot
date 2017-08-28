@@ -1,4 +1,5 @@
 local discordia = require('discordia')
+local fs = require('fs')
 --local https = require('https')
 client = discordia.Client()
 --local xml = require("xmlSimple.lua").newParser()
@@ -19,7 +20,7 @@ function handleMessage(message)
         local option, content = string.match(message.content, "(%g*)%s?(.*)", 2)
         if option ~= nil and content ~= nil then
             if optionList[option] ~= nil then
-                if optionList[option][2] == true then
+                if optionList[option].isOn == true then
                     --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
                     if blocked == false then
                         blocked = true
@@ -50,20 +51,35 @@ client:on('messageFinished', messageFinished)
 
 
 
---[[ START OF COMMANDS ]]--
-
-optionList["GR"] = {require('./commands/GR.lua').init(client), true}
-optionList["ping"] = {require('./commands/pingpong.lua').init(client), false}
-optionList["giveaway"] = {require('./commands/giveaway.lua').init(client), false}
-
---END OF COMMANDS
-
---set listeners for all commands in optionsList
-for k,v in pairs(optionList) do
-    if v[2] == true then
-        client:on(k,v[1].run)
+--[[  START OF COMMANDS SET-UP ]]--
+--
+local function setupCommands(a, b)
+    print('loading commands')
+    if a ~= nil then
+        print(a)
+        return
     end
+
+    for k,v in pairs(b) do
+
+        local command = string.match(v, '(.-).lua')
+        optionList[command] = require('./commands/' .. v).init(client)
+        print('    found command: ' .. command .. ', isOn: ' .. tostring(optionList[command].isOn))
+
+        --set listeners for all commands in optionsList
+        if optionList[command].isOn == true then
+            client:on(command, optionList[command].run)
+        end
+    end
+    print('end\n')
 end
+
+--optionList["GR"] = {require('./commands/GR.lua').init(client), true}
+--optionList["ping"] = {require('./commands/pingpong.lua').init(client), false}
+--optionList["giveaway"] = {require('./commands/giveaway.lua').init(client), false}
+
+fs.readdir('./commands', setupCommands)
+--[[  END OF COMMAND SET-UP  ]]--
 
 --GR-BOT
 client:run('MzM4NzY0MTQzOTgzMTk4MjA4.DFf1KQ.sGv0lQCMu02RZmDRY3LDAJq3E7o')

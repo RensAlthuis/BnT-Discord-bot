@@ -59,7 +59,10 @@ local function init(cl)
     client = cl
     client:on('GR_chunk', GR_chunk)
     client:on('GR_result', GR_result)
-    return {run = run}
+    return{
+        run = run,
+        ['isOn'] = true
+    }
 end
 return { init = init }
 
