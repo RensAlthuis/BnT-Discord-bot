@@ -10,31 +10,41 @@ local client = nil
 local function timerCallback()
     for k,v in pairs(timerList) do
         if v[1] <= 0 then
-            print(k .. ' finished')
+            print('timer: ' .. k .. ' finished')
             table.remove(timerList, k)
         else
-            print(k .. ': ' .. v[1])
             timerList[k][1] = v[1] - 1
-            client:emit('updatemessage', k)
         end
     end
+
+    client:emit('updatemessages')
 end
 
-local function updateMessage(k)
-    timerList[k][2].content = 'timer: ' .. timerList[k][1]
+local function updateMessages()
+    for k,v in pairs(timerList) do
+        if v[1] <= 0 then
+            timerList[k][2].content = 'timer: finished'
+        else
+            timerList[k][2].content = 'timer: ' .. timerList[k][1]
+        end
+
+    end
 end
 
 local function run(message, content)
 
-    mess = message.channel:sendMessage('timer: 20')
-    table.insert(timerList, {20, mess})
+    t = tonumber(content)
+    print('    Started new timer with: ' .. t .. 's')
+    mess = message.channel:sendMessage('timer: ' .. t)
+    table.insert(timerList, {t, mess})
 
     client:emit('messageFinished')
 end
 
 function init(cl)
     client = cl
-    client:on('updatemessage', updateMessage)
+
+    client:on('updatemessages', updateMessages)
 
     timer.setInterval(1000, timerCallback)
     return { run = run }

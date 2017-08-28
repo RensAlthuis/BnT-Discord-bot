@@ -16,7 +16,7 @@ local optionList = {} -- List {"command", func} of all commands and correspondin
 function handleMessage(message)
 
     if string.sub(message.content, 0, 1) == '!' then
-        local option, content = string.match(message.content, "(%g*) (.*)", 2)
+        local option, content = string.match(message.content, "(%g*)%s?(.*)", 2)
         if option ~= nil and content ~= nil then
             if option ~= nil then
                 if optionList[option] ~= nil then
@@ -48,9 +48,12 @@ end
 client:on('messageCreate', handleMessage)
 client:on('messageFinished', messageFinished)
 
+
+
 --[[ START OF COMMANDS ]]--
 
 optionList["GR"] = require('./commands/GR.lua').init(client)
+optionList["ping"] = require('./commands/pingpong.lua').init(client)
 optionList["giveaway"] = require('./commands/giveaway.lua').init(client)
 
 --END OF COMMANDS
