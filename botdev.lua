@@ -18,8 +18,8 @@ function handleMessage(message)
     if string.sub(message.content, 0, 1) == '!' then
         local option, content = string.match(message.content, "(%g*)%s?(.*)", 2)
         if option ~= nil and content ~= nil then
-            if option ~= nil then
-                if optionList[option] ~= nil then
+            if optionList[option] ~= nil then
+                if optionList[option][2] == true then
                     --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
                     if blocked == false then
                         blocked = true
@@ -52,15 +52,17 @@ client:on('messageFinished', messageFinished)
 
 --[[ START OF COMMANDS ]]--
 
-optionList["GR"] = require('./commands/GR.lua').init(client)
-optionList["ping"] = require('./commands/pingpong.lua').init(client)
-optionList["giveaway"] = require('./commands/giveaway.lua').init(client)
+optionList["GR"] = {require('./commands/GR.lua').init(client), true}
+optionList["ping"] = {require('./commands/pingpong.lua').init(client), false}
+optionList["giveaway"] = {require('./commands/giveaway.lua').init(client), false}
 
 --END OF COMMANDS
 
 --set listeners for all commands in optionsList
 for k,v in pairs(optionList) do
-    client:on(k,v.run)
+    if v[2] == true then
+        client:on(k,v[1].run)
+    end
 end
 
 --GR-BOT
