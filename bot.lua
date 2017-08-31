@@ -1,90 +1,88 @@
 local discordia = require('discordia')
-local https = require('https')
-local client = discordia.Client()
-local xml = require("xmlSimple.lua").newParser()
+local fs = require('fs')
+client = discordia.Client()
+keyfile = args[2]
 
 client:on('ready', function()
     blocked = false
-	print('Logged in as '.. client.user.username)
+	print('Logged in as ' .. client.user.username .. '\n')
 end)
 
-local messQueue = {}
-local response = ""
+local messQueue = {} -- List of messages still to be handled
+local optionList = {} -- List {"command", func} of all commands and corresponding functions
 
+--searches messages for command and call corresponding handler if a command is found
 function handleMessage(message)
-    if blocked == false then
-        blocked = true
-            --print("start " .. start .. " finish " .. finish)
-            start, finish = string.find(message.content, "!GR ")
-            if string.len(message.content) > finish then
-                host = "https://www.goodreads.com"
-                search = string.sub(message.content, finish+1)
-                searchUrl = host .. '/search.xml?key=EeG9ipXRB8OWxZBFrLYQ&q=' .. search
-                searchUrl = string.gsub(searchUrl, '%s', '+')
 
-                print("url: " .. searchUrl)
-
-                local req = https.get(searchUrl, function (res)
-                    local bookid = nil
-                    res:on('data', function (chunk)
-
-                    client:emit('chunkRecieved', chunk)
-
-                  end)
-
-                  res:on('end', function()
-                      client:emit('bookfound', message.channel, bookid)
-                  end)
-                end)
-
-                req:done()
+    if string.sub(message.content, 0, 1) == '!' then
+        local option, content = string.match(message.content, "(%g*)%s?(.*)", 2)
+        if option ~= nil and content ~= nil then
+            if optionList[option] ~= nil then
+                if optionList[option].isOn == true then
+                    --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
+                    if blocked == false then
+                        blocked = true
+                        date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
+                        print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
+                        client:emit(option, message, content)
+                    else
+                        table.insert(messQueue, 1, message)
+                    end
+                end
             end
-    else
-        print("blocked, message added to queue")
-        table.insert(messQueue, 1, message)
+        end
     end
 end
 
-client:on('messageCreate', function(message)
-    start, finish = string.find(message.content, "!GR ")
-    if start == 1 then
-        print(message)
-        handleMessage(message)
-    end
-end)
-client:on('chunkRecieved', function(chunk)
-    response = response .. chunk
-end)
-
-client:on('bookfound', function(channel, bookid)
-
-    response = string.gsub(response, '<name', '<the_name')
-    response = string.gsub(response, '</name', '</the_name')
-
-    parsedXml = xml:ParseXmlText(response)
-    results = parsedXml.GoodreadsResponse.search:children()[7]
-    if results:children()[1] ~= nil then
-        bookid = results:children()[1].best_book.id:value()
-        if bookid ~= nil then
-            print('book found with bookid: '.. bookid)
-            channel:sendMessage("https://www.goodreads.com/book/show/" .. bookid)
-            bookid = nil
-        end
-    else
-        channel:sendMessage("No results found")
-        print('no results found')
-    end
-    response = ""
+--Unblocks the messageHandler and if necessary calls the next message in the queue
+function messageFinished()
+    print("end \n")
     blocked = false
-
     mess = table.remove(messQueue)
     if mess ~= nil then
-        print("handling queued message")
         handleMessage(mess)
     end
-end)
+end
 
---GR-BOT
---client:run('MzM4NzY0MTQzOTgzMTk4MjA4.DFf1KQ.sGv0lQCMu02RZmDRY3LDAJq3E7o')
---BooksandTea-bot
-client:run('MzM5MTQ1NjU2MTgwNDA4MzIw.DFfthw.bERJ0hg5iLTtyhqIM6XW58Lk9Jw')
+client:on('messageCreate', handleMessage)
+client:on('messageFinished', messageFinished)
+
+--Search commands folder for .lua files and load them into optionList
+local function setupCommands(a, b)
+    print('loading commands')
+    if a ~= nil then
+        print(a)
+        return
+    end
+
+    for k,v in pairs(b) do
+
+        local command = string.match(v, '(.-).lua')
+	if command ~= nil then
+		optionList[command] = require('./commands/' .. v).init(client)
+		print('    found command: ' .. command .. ', isOn: ' .. tostring(optionList[command].isOn))
+
+		--set listeners for all commands in optionsList
+		if optionList[command].isOn == true then
+		    client:on(command, optionList[command].run)
+		end
+	end
+    end
+    print('end\n')
+end
+
+fs.readdir('./commands', setupCommands)
+
+-- start bot using key read from the file
+local function startBot(err, file)
+
+    print('starting bot')
+    if a ~= nil then
+        print(err)
+        return
+    end
+
+    client:run(file)
+end
+
+fs.readFile(keyfile, startBot)

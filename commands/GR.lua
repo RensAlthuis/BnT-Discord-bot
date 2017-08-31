@@ -2,18 +2,35 @@ client = nil
 local https = require("https")
 local xml = require('../deps/xmlSimple.lua').newParser()
 local response = ""
+local fs = require('fs')
+GRkey = nil
 
 local function GR_chunk(chunk)
     response = response .. chunk
 end
 
+local function readGRKey()
+    if err ~= nil then
+        print(err)
+        return
+    end
+
+    fs.readFile('./commands/GR.key', function(err, file)
+	if err ~= nil then
+            print(err)
+        end
+        GRkey = file
+    end)
+end
+
 --process the result
 local function GR_result(channel)
 
-    local response = string.gsub(response, '<name', '<the_name')
+    response = string.gsub(response, '<name', '<the_name')
     response = string.gsub(response, '</name', '</the_name')
 
     local parsedXml = xml:ParseXmlText(response)
+
     local results = parsedXml.GoodreadsResponse.search:children()[7]
     if results:children()[1] ~= nil then
         local bookid = results:children()[1].best_book.id:value()
@@ -34,7 +51,7 @@ end
 --initiates the websearch then sends the result on to GR_result
 local function run(message, content)
         host = "https://www.goodreads.com"
-        searchUrl = host .. '/search.xml?key=EeG9ipXRB8OWxZBFrLYQ&q=' .. content
+        searchUrl = host .. '/search.xml?key=' .. GRkey .. '&q=' .. content
         searchUrl = string.gsub(searchUrl, '%s', '+')
 
         print("    url: " .. searchUrl)
@@ -57,6 +74,7 @@ end
 
 local function init(cl)
     client = cl
+    readGRKey()
     client:on('GR_chunk', GR_chunk)
     client:on('GR_result', GR_result)
     return{
