@@ -49,10 +49,7 @@ end
 client:on('messageCreate', handleMessage)
 client:on('messageFinished', messageFinished)
 
-
-
---[[  START OF COMMANDS SET-UP ]]--
---
+--Search commands folder for .lua files and load them into optionList
 local function setupCommands(a, b)
     print('loading commands')
     if a ~= nil then
@@ -74,14 +71,18 @@ local function setupCommands(a, b)
     print('end\n')
 end
 
---optionList["GR"] = {require('./commands/GR.lua').init(client), true}
---optionList["ping"] = {require('./commands/pingpong.lua').init(client), false}
---optionList["giveaway"] = {require('./commands/giveaway.lua').init(client), false}
-
 fs.readdir('./commands', setupCommands)
---[[  END OF COMMAND SET-UP  ]]--
 
---GR-BOT
-client:run('MzM4NzY0MTQzOTgzMTk4MjA4.DFf1KQ.sGv0lQCMu02RZmDRY3LDAJq3E7o')
---BooksandTea-bot
---client:run('MzM5MTQ1NjU2MTgwNDA4MzIw.DFfthw.bERJ0hg5iLTtyhqIM6XW58Lk9Jw')
+-- start bot using key read from the file ./key
+local function startBot(err, file)
+
+    print('starting bot')
+    if a ~= nil then
+        print(err)
+        return
+    end
+
+    client:run(file)
+end
+
+fs.readFile('./key', startBot)
