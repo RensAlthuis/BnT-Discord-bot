@@ -12,7 +12,8 @@ local messQueue = {} -- List of messages still to be handled
 local optionList = {} -- List {"command", func} of all commands and corresponding functions
 
 --searches messages for command and call corresponding handler if a command is found
-function handleMessage(message)
+function create(message)
+    message.type = 'create'
 
     if string.sub(message.content, 0, 1) == '!' then
         local option, content = string.match(message.content, "(%g*)%s?(.*)", 2)
@@ -24,7 +25,7 @@ function handleMessage(message)
                         blocked = true
                         date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
                         print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
-                        client:emit(option, message, content)
+                        client:emit(option..'RUN', message, content)
                     else
                         table.insert(messQueue, 1, message)
                     end
@@ -34,28 +35,60 @@ function handleMessage(message)
     end
 end
 
+function delete(message)
+    message.type = 'delete'
+
+    if string.sub(message.content, 0, 1) == '!' then
+        local option, content = string.match(message.content, "(%g*)%s?(.*)", 2)
+        if option ~= nil and content ~= nil then
+            if optionList[option] ~= nil then
+                if optionList[option].isOn == true then
+                    --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
+                    if blocked == false then
+                        blocked = true
+                        date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
+                        print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
+                        print("    DELETED")
+                        client:emit(option..'DEL', message, content)
+                    else
+                        table.insert(messQueue, 1, message)
+                    end
+                end
+            end
+        end
+    end
+end
 --Unblocks the messageHandler and if necessary calls the next message in the queue
 function messageFinished()
     print("end \n")
     blocked = false
     mess = table.remove(messQueue)
     if mess ~= nil then
-        handleMessage(mess)
+        if message.type == 'create' then
+            create(mess)
+        else
+            if message.type == 'delete' then
+                delete(mess)
+            else
+                print ('MESSAGE QUEUE ERROR: no type')
+            end
+        end
     end
 end
 
-client:on('messageCreate', handleMessage)
+client:on('messageDelete', delete)
+client:on('messageCreate', create)
 client:on('messageFinished', messageFinished)
 
 --Search commands folder for .lua files and load them into optionList
-local function setupCommands(a, b)
+local function setupCommands(err, file)
     print('loading commands')
-    if a ~= nil then
-        print(a)
+    if err ~= nil then
+        print(err)
         return
     end
 
-    for k,v in pairs(b) do
+    for k,v in pairs(file) do
 
         local command = string.match(v, '(.-).lua')
 	if command ~= nil then
@@ -64,7 +97,13 @@ local function setupCommands(a, b)
 
 		--set listeners for all commands in optionsList
 		if optionList[command].isOn == true then
-		    client:on(command, optionList[command].run)
+            if optionList[command].run ~= nil then
+                client:on(command .. 'RUN', optionList[command].run)
+            end
+
+            if optionList[command].del ~= nil then
+                client:on(command .. 'DEL', optionList[command].del)
+            end
 		end
 	end
     end
@@ -77,7 +116,7 @@ fs.readdir('./commands', setupCommands)
 local function startBot(err, file)
 
     print('starting bot')
-    if a ~= nil then
+    if err ~= nil then
         print(err)
         return
     end

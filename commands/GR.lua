@@ -71,6 +71,15 @@ local function run(message, content)
         req:done()
 end
 
+local function del(message)
+    local mess = message.channel.getMessageHistoryAfter(message.channel, message, 1)()
+    print(mess.author)
+    if mess.author.name == 'BooksandTea-Bot' then
+        mess.delete(mess)
+    end
+
+    client:emit("messageFinished")
+end
 
 local function init(cl)
     client = cl
@@ -79,6 +88,7 @@ local function init(cl)
     client:on('GR_result', GR_result)
     return{
         run = run,
+        del = del,
         ['isOn'] = true
     }
 end
