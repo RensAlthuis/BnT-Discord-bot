@@ -11,50 +11,74 @@ end)
 local messQueue = {} -- List of messages still to be handled
 local optionList = {} -- List {"command", func} of all commands and corresponding functions
 
---searches messages for command and call corresponding handler if a command is found
-function create(message)
-    message.type = 'create'
+local function checkMessage(message)
 
     if string.sub(message.content, 0, 1) == '!' then
         local option, content = string.match(message.content, "(%g*)%s?(.*)", 2)
         if option ~= nil and content ~= nil then
             if optionList[option] ~= nil then
                 if optionList[option].isOn == true then
-                    --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
-                    if blocked == false then
-                        blocked = true
-                        date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
-                        print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
-                        client:emit(option..'RUN', message, content)
-                    else
-                        table.insert(messQueue, 1, message)
-                    end
+                    return true, option, content
                 end
             end
+        end
+    end
+
+    return false
+end
+
+--searches messages for command and call corresponding handler if a command is found
+function create(message)
+    message.handler = create
+
+    ok, option, content = checkMessage(message)
+
+    if ok then
+        --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
+        if blocked == false then
+            blocked = true
+            date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
+            print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
+            client:emit(option..'RUN', message, content)
+        else
+            table.insert(messQueue, 1, message)
         end
     end
 end
 
 function delete(message)
-    message.type = 'delete'
+    message.handler = delete
 
-    if string.sub(message.content, 0, 1) == '!' then
-        local option, content = string.match(message.content, "(%g*)%s?(.*)", 2)
-        if option ~= nil and content ~= nil then
-            if optionList[option] ~= nil then
-                if optionList[option].isOn == true then
-                    --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
-                    if blocked == false then
-                        blocked = true
-                        date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
-                        print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
-                        print("    DELETED")
-                        client:emit(option..'DEL', message, content)
-                    else
-                        table.insert(messQueue, 1, message)
-                    end
-                end
-            end
+    ok, option, content = checkMessage(message)
+
+    if ok then
+        --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
+        if blocked == false then
+            blocked = true
+            date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
+            print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
+            print("    DELETED")
+            client:emit(option..'DEL', message, content)
+        else
+            table.insert(messQueue, 1, message)
+        end
+    end
+end
+
+function update(message)
+    message.handler = update
+
+    ok, option, content = checkMessage(message)
+
+    if ok then
+        if blocked == false then
+            blocked = true
+            date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
+            print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
+            print("    UPDATED")
+            client:emit(option..'UPDATE', message, content)
+        else
+            table.insert(messQueue, 1, message)
         end
     end
 end
@@ -64,19 +88,12 @@ function messageFinished()
     blocked = false
     mess = table.remove(messQueue)
     if mess ~= nil then
-        if message.type == 'create' then
-            create(mess)
-        else
-            if message.type == 'delete' then
-                delete(mess)
-            else
-                print ('MESSAGE QUEUE ERROR: no type')
-            end
-        end
+        mess.handler(mess)
     end
 end
 
 client:on('messageDelete', delete)
+client:on('messageUpdate', update)
 client:on('messageCreate', create)
 client:on('messageFinished', messageFinished)
 
@@ -103,6 +120,10 @@ local function setupCommands(err, file)
 
             if optionList[command].del ~= nil then
                 client:on(command .. 'DEL', optionList[command].del)
+            end
+
+            if optionList[command].update ~= nil then
+                client:on(command .. 'UPDATE', optionList[command].update)
             end
 		end
 	end
