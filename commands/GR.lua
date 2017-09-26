@@ -58,11 +58,15 @@ end
 
 local function updateMess(bookid, message)
     local mess = message.channel.getMessageHistoryAfter(message.channel, message, 1)()
-    if mess.author.name == 'BooksandTea-Bot' then
-        if bookid ~= nil then
-            mess.content = "https://www.goodreads.com/book/show/" .. bookid
-        else
-            mess.content = "No results found"
+    if mess == nil then
+        print("    WARNING: No message found")
+    else
+        if mess.author.name == 'BooksandTea-Bot' then
+            if bookid ~= nil then
+                mess.content = "https://www.goodreads.com/book/show/" .. bookid
+            else
+                mess.content = "No results found"
+            end
         end
     end
 
@@ -95,8 +99,12 @@ end
 
 local function del(message)
     local mess = message.channel.getMessageHistoryAfter(message.channel, message, 1)()
-    if mess.author.name == 'BooksandTea-Bot' then
-        mess.delete(mess)
+    if mess == nil then
+        print("    WARNING: No message found")
+    else
+        if mess.author.name == 'BooksandTea-Bot' then
+            mess.delete(mess)
+        end
     end
 
     client:emit("messageFinished")
