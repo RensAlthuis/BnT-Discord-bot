@@ -146,3 +146,4 @@ local function startBot(err, file)
 end
 
 fs.readFile(keyfile, startBot)
+
