@@ -1,3 +1,3 @@
 #!/bin/bash
 
-luvit bot.lua bnt.key >> log &
+luvit bot.lua bnt.key &>> log &
