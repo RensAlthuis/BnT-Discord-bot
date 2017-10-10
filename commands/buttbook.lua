@@ -49,9 +49,9 @@ end
 
 local function postMess(bookid, channel)
     if bookid ~= nil then
-        channel:sendMessage("https://www.goodreads.com/book/show/" .. bookid)
+        channel:send("https://www.goodreads.com/book/show/" .. bookid)
     else
-        channel:sendMessage("No results found")
+        channel:send("No results found")
     end
 
     client:emit("messageFinished")

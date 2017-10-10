@@ -35,7 +35,7 @@ local function run(message, content)
 
     t = tonumber(content)
     print('    Started new timer with: ' .. t .. 's')
-    mess = message.channel:sendMessage('timer: ' .. t)
+    mess = message.channel:send('timer: ' .. t)
     table.insert(timerList, {t, mess})
 
     client:emit('messageFinished')

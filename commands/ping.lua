@@ -3,7 +3,7 @@ local client = nil
 function run(message, content)
 
     print("    reply: pong")
-    message.channel:sendMessage('pong')
+    message.channel:send('pong')
     client:emit('messageFinished')
 end
 

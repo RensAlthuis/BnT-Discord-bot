@@ -48,24 +48,30 @@ end
 
 local function postMess(bookid, channel)
     if bookid ~= nil then
-        channel:sendMessage("https://www.goodreads.com/book/show/" .. bookid)
+        channel:send("https://www.goodreads.com/book/show/" .. bookid)
     else
-        channel:sendMessage("No results found")
+        channel:send("No results found")
     end
 
     client:emit("messageFinished")
 end
 
 local function updateMess(bookid, message)
-    local mess = message.channel.getMessageHistoryAfter(message.channel, message, 1)()
+    local res = message.channel:getMessagesAfter(message, 1)
+    local mess = nil 
+
+    for v in res:iter() do
+        mess = v
+    end
+
     if mess == nil then
-        print("    WARNING: No message found")
+        print('    no message found')
     else
         if mess.author.name == 'BooksandTea-Bot' then
             if bookid ~= nil then
-                mess.content = "https://www.goodreads.com/book/show/" .. bookid
+                mess:setContent("https://www.goodreads.com/book/show/" .. bookid)
             else
-                mess.content = "No results found"
+                mess:setContent("No results found")
             end
         end
     end
@@ -98,40 +104,60 @@ local function run(message, content)
 end
 
 local function del(message)
-    local mess = message.channel.getMessageHistoryAfter(message.channel, message, 1)()
+    local res = message.channel:getMessagesAfter(message, 1)
+    local mess = nil
+
+    for v in res:iter() do
+        mess = v
+    end
+
     if mess == nil then
-        print("    WARNING: No message found")
+        print('    no message found')
     else
+
         if mess.author.name == 'BooksandTea-Bot' then
             mess.delete(mess)
         end
+
     end
 
     client:emit("messageFinished")
 end
 
 local function update(message, content)
-    local mess = message.channel.getMessageHistoryAfter(message.channel, message, 1)()
-    if mess.author.name == 'BooksandTea-Bot' then
-        host = "https://www.goodreads.com"
-        searchUrl = host .. '/search.xml?key=' .. GRkey .. '&q=' .. content
-        searchUrl = string.gsub(searchUrl, '%s', '+')
+    local res = message.channel:getMessagesAfter(message, 1)
+    local mess = nil 
 
-        print("    url: " .. searchUrl)
+    for v in res:iter() do
+        mess = v
+    end
 
-        local req = https.get(searchUrl, function (res)
-            res:on('data', function (chunk)
-                client:emit('GR_chunk', chunk)
+    if mess == nil then
+        print('    no message found')
+        client:emit('messageFinished')
+	return
+    else
+    
+        if mess.author.name == 'BooksandTea-Bot' then
+            host = "https://www.goodreads.com"
+            searchUrl = host .. '/search.xml?key=' .. GRkey .. '&q=' .. content
+            searchUrl = string.gsub(searchUrl, '%s', '+')
+    
+            print("    url: " .. searchUrl)
+    
+            local req = https.get(searchUrl, function (res)
+                res:on('data', function (chunk)
+                    client:emit('GR_chunk', chunk)
+                end)
+    
+                res:on('end', function()
+                    bookid = result()
+                    client:emit('GR_updateMess', bookid, message)
+                end)
             end)
-
-            res:on('end', function()
-                bookid = result()
-                client:emit('GR_updateMess', bookid, message)
-            end)
-        end)
-
-        req:done()
-
+    
+            req:done()
+        end
     end
 end
 

@@ -29,7 +29,7 @@ end
 
 --searches messages for command and call corresponding handler if a command is found
 function create(message)
-    message.handler = create
+    message._handler = create
 
     ok, option, content = checkMessage(message)
 
@@ -47,7 +47,7 @@ function create(message)
 end
 
 function delete(message)
-    message.handler = delete
+    message._handler = delete
 
     ok, option, content = checkMessage(message)
 
@@ -66,7 +66,7 @@ function delete(message)
 end
 
 function update(message)
-    message.handler = update
+    message._handler = update
 
     ok, option, content = checkMessage(message)
 
@@ -88,7 +88,7 @@ function messageFinished()
     blocked = false
     mess = table.remove(messQueue)
     if mess ~= nil then
-        mess.handler(mess)
+        mess._handler(mess)
     end
 end
 
@@ -142,7 +142,7 @@ local function startBot(err, file)
         return
     end
 
-    client:run(file)
+    client:run('Bot ' .. file)
 end
 
 fs.readFile(keyfile, startBot)
