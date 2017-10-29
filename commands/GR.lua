@@ -73,6 +73,9 @@ local function updateMess(bookid, message)
             else
                 mess:setContent("No results found")
             end
+        else
+            print('    no message found')
+            client:emit("messageFinished")
         end
     end
 
@@ -157,6 +160,9 @@ local function update(message, content)
             end)
     
             req:done()
+	else
+	    print('    no message found')
+            client:emit("messageFinished") 
         end
     end
 end

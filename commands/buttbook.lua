@@ -83,9 +83,15 @@ local function run(message, content)
 end
 
 local function del(message)
-    local mess = message.channel.getMessageHistoryAfter(message.channel, message, 1)()
+    local res = message.channel:getMessagesAfter(message, 1)
+    local mess = nil
+
+    for v in res:iter() do
+        mess = v
+    end
+
     if mess == nil then
-        print("    WARNING: No message found")
+        print("    No message found")
     else
         if mess.author.name == 'BooksandTea-Bot' then
             mess.delete(mess)

@@ -11,6 +11,22 @@ end)
 local messQueue = {} -- List of messages still to be handled
 local optionList = {} -- List {"command", func} of all commands and corresponding functions
 
+local function funstuff(message)
+    if message.author.name == "Buttbot" then
+	local r = math.random(5)
+        print("butt:  " .. r)
+	if r == 1 then
+            message:addReaction("\xE2\x9D\xA4")
+	end
+    end
+    if message.author.name == "Emmie" then
+        local r = math.random(50)
+        if r == 1 then
+            message:addReaction("\xF0\x9F\x91\xBB")
+        end
+    end
+end
+
 local function checkMessage(message)
 
     if string.sub(message.content, 0, 1) == '!' then
@@ -44,6 +60,7 @@ function create(message)
             table.insert(messQueue, 1, message)
         end
     end
+    funstuff(message)
 end
 
 function delete(message)
@@ -58,7 +75,11 @@ function delete(message)
             date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
             print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
             print("    DELETED")
-            client:emit(option..'DEL', message, content)
+	    if optionList[option].delete ~= nil then
+                client:emit(option..'DEL', message, content)
+            else 
+                client:emit("messageFinished");
+            end
         else
             table.insert(messQueue, 1, message)
         end
@@ -76,7 +97,11 @@ function update(message)
             date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
             print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
             print("    UPDATED")
-            client:emit(option..'UPDATE', message, content)
+            if optionList[option].update ~= nil then
+                client:emit(option..'UPDATE', message, content)
+            else
+                client:emit("messageFinished");
+            end
         else
             table.insert(messQueue, 1, message)
         end
