@@ -925,3 +925,100 @@
 2017-10-27 20:45:30 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
 2017-10-27 20:45:30 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-b4hp)
 2017-10-27 20:45:30 | [INFO]    | Shard 0 : Received RESUMED (gateway-prd-main-b4hp, discord-sessions-prd-1-5)
+2017-10-30 16:27:09 | [INFO]    | Shard 0 : Disconnected
+2017-10-30 16:27:09 | [INFO]    | Shard 0 : Reconnecting after 1078 ms...
+2017-10-30 16:27:10 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-30 16:27:10 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-73t8)
+2017-10-30 16:27:10 | [INFO]    | Shard 0 : Received RESUMED (gateway-prd-main-73t8, discord-sessions-prd-1-5)
+2017-10-30 20:00:54 | [WARNING] | Shard 0 : 1001 - CloudFlare WebSocket proxy restarting
+2017-10-30 20:00:54 | [INFO]    | Shard 0 : Disconnected
+2017-10-30 20:00:54 | [INFO]    | Shard 0 : Reconnecting after 966 ms...
+2017-10-30 20:00:55 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-30 20:00:55 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-7917)
+2017-10-30 20:00:55 | [INFO]    | Shard 0 : Received RESUMED (gateway-prd-main-7917, discord-sessions-prd-1-5)
+2017-10-31 03:34:04 | [INFO]    | Shard 0 : Disconnected
+2017-10-31 03:34:04 | [INFO]    | Shard 0 : Reconnecting after 916 ms...
+2017-10-31 03:34:05 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 03:34:05 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-qmd7)
+2017-10-31 03:34:05 | [INFO]    | Shard 0 : Received RESUMED (gateway-prd-main-qmd7, discord-sessions-prd-1-5)
+2017-10-31 16:35:38 | [INFO]    | Shard 0 : Disconnected
+2017-10-31 16:35:38 | [INFO]    | Shard 0 : Reconnecting after 934 ms...
+2017-10-31 16:35:39 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 16:35:39 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-gtjn)
+2017-10-31 16:35:39 | [INFO]    | Shard 0 : Received RESUMED (gateway-prd-main-gtjn, discord-sessions-prd-1-5)
+2017-10-31 16:47:41 | [INFO]    | Shard 0 : Disconnected
+2017-10-31 16:47:41 | [INFO]    | Shard 0 : Reconnecting after 928 ms...
+2017-10-31 16:47:43 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 16:47:43 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-zm0f)
+2017-10-31 16:47:43 | [INFO]    | Shard 0 : Received RESUMED (gateway-prd-main-zm0f, discord-sessions-prd-1-5)
+2017-10-31 19:26:30 | [INFO]    | Shard 0 : Disconnected
+2017-10-31 19:26:30 | [INFO]    | Shard 0 : Reconnecting after 925 ms...
+2017-10-31 19:26:31 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 19:26:31 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-v5x4)
+2017-10-31 19:26:31 | [INFO]    | Shard 0 : Received RESUMED (gateway-prd-main-v5x4, discord-sessions-prd-1-5)
+2017-10-31 23:37:38 | [INFO]    | Shard 0 : Disconnected
+2017-10-31 23:37:38 | [INFO]    | Shard 0 : Reconnecting after 1086 ms...
+2017-10-31 23:37:39 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 23:37:39 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-t111)
+2017-10-31 23:37:39 | [INFO]    | Shard 0 : Received RESUMED (gateway-prd-main-t111, discord-sessions-prd-1-5)
+2017-11-02 10:54:06 | [INFO]    | Shard 0 : Disconnected
+2017-11-02 10:54:06 | [INFO]    | Shard 0 : Reconnecting after 995 ms...
+2017-11-02 10:54:08 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 10:54:08 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-sd7x)
+2017-11-02 10:54:08 | [INFO]    | Shard 0 : Received RESUMED (gateway-prd-main-sd7x, discord-sessions-prd-1-5)
+2017-11-02 15:49:04 | [WARNING] | Shard 0 : Previous heartbeat not acknowledged
+2017-11-02 16:04:33 | [INFO]    | Shard 0 : Disconnected
+2017-11-02 16:04:33 | [INFO]    | Shard 0 : Reconnecting...
+2017-11-02 16:04:33 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 16:04:33 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-3zgs)
+2017-11-02 16:04:33 | [INFO]    | Shard 0 : Session invalidated, re-identifying...
+2017-11-02 16:04:36 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-3zgs, discord-sessions-prd-1-9)
+2017-11-02 20:57:58 | [INFO]    | Discordia 2.1.0
+2017-11-02 20:57:58 | [INFO]    | Connecting to Discord...
+2017-11-02 20:57:59 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-02 20:57:59 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-02 20:57:59 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 20:57:59 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-xqlf)
+2017-11-02 20:58:00 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-xqlf, discord-sessions-prd-1-7)
+2017-11-02 20:59:38 | [INFO]    | Discordia 2.1.0
+2017-11-02 20:59:38 | [INFO]    | Connecting to Discord...
+2017-11-02 20:59:38 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-02 20:59:38 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-02 20:59:38 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 20:59:38 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-4wd1)
+2017-11-02 20:59:38 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-4wd1, discord-sessions-prd-1-16)
+2017-11-02 21:02:50 | [INFO]    | Discordia 2.1.0
+2017-11-02 21:02:50 | [INFO]    | Connecting to Discord...
+2017-11-02 21:02:50 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:02:50 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-02 21:02:51 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:02:51 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-2mlw)
+2017-11-02 21:02:51 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-2mlw, discord-sessions-prd-1-8)
+2017-11-02 21:04:29 | [INFO]    | Discordia 2.1.0
+2017-11-02 21:04:29 | [INFO]    | Connecting to Discord...
+2017-11-02 21:04:29 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:04:29 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-02 21:04:30 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:04:30 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-s0b0)
+2017-11-02 21:04:30 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-s0b0, discord-sessions-prd-1-9)
+2017-11-02 21:05:36 | [INFO]    | Discordia 2.1.0
+2017-11-02 21:05:36 | [INFO]    | Connecting to Discord...
+2017-11-02 21:05:37 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:05:37 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-02 21:05:37 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:05:37 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-qgwq)
+2017-11-02 21:05:37 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-qgwq, discord-sessions-prd-1-4)
+2017-11-02 21:07:08 | [INFO]    | Discordia 2.1.0
+2017-11-02 21:07:08 | [INFO]    | Connecting to Discord...
+2017-11-02 21:07:08 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:07:08 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-02 21:07:09 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:07:09 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-xd9x)
+2017-11-02 21:07:09 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-xd9x, discord-sessions-prd-1-4)
+2017-11-02 21:09:48 | [INFO]    | Discordia 2.1.0
+2017-11-02 21:09:48 | [INFO]    | Connecting to Discord...
+2017-11-02 21:09:49 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:09:49 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-02 21:09:49 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:09:49 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-p1np)
+2017-11-02 21:09:49 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-p1np, discord-sessions-prd-1-1)

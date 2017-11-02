@@ -106,7 +106,7 @@ local function run(message, content)
         req:done()
 end
 
-local function del(message)
+local function del(message, content)
     local res = message.channel:getMessagesAfter(message, 1)
     local mess = nil
 
@@ -117,7 +117,6 @@ local function del(message)
     if mess == nil then
         print('    no message found')
     else
-
         if mess.author.name == 'BooksandTea-Bot' then
             mess.delete(mess)
         end

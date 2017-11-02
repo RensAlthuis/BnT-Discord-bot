@@ -75,7 +75,7 @@ function delete(message)
             date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
             print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
             print("    DELETED")
-	    if optionList[option].delete ~= nil then
+	    if optionList[option].del ~= nil then
                 client:emit(option..'DEL', message, content)
             else 
                 client:emit("messageFinished");

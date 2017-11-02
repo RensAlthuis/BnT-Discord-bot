@@ -3950,3 +3950,570 @@ end
 butt:  1
 butt:  5
 butt:  3
+butt:  5
+butt:  3
+butt:  5
+butt:  2
+butt:  2
+[23:19:44 2017-10-29] command: GR, author: toastyfrog, content: death by pumpkin spice
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=death+by+pumpkin+spice
+    book found with bookid: 28439445
+end 
+
+[23:20:44 2017-10-29] command: GR, author: Excelsius, content: Wise mans Fear
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Wise+mans+Fear
+    book found with bookid: 1215032
+end 
+
+[23:20:51 2017-10-29] command: GR, author: Excelsius, content: Regard of slow things
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Regard+of+slow+things
+    book found with bookid: 21535271
+end 
+
+[23:21:01 2017-10-29] command: GR, author: Excelsius, content: World War Z: operations Zomby
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=World+War+Z:+operations+Zomby
+    no results found
+end 
+
+[23:21:01 2017-10-29] command: GR, author: Excelsius, content: World War Z: operations Zombie
+    UPDATED
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=World+War+Z:+operations+Zombie
+    book found with bookid: 8908
+end 
+
+butt:  2
+butt:  5
+butt:  3
+butt:  3
+butt:  5
+butt:  5
+butt:  4
+butt:  5
+[01:19:07 2017-10-30] command: GR, author: SLNC, content: mistborn secret history
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=mistborn+secret+history
+    book found with bookid: 28698036
+end 
+
+butt:  5
+butt:  5
+butt:  4
+butt:  5
+2017-10-30 16:27:09 | [1;32m[INFO]   [0m | Shard 0 : Disconnected
+2017-10-30 16:27:09 | [1;32m[INFO]   [0m | Shard 0 : Reconnecting after 1078 ms...
+2017-10-30 16:27:10 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-30 16:27:10 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-73t8)
+2017-10-30 16:27:10 | [1;32m[INFO]   [0m | Shard 0 : Received RESUMED (gateway-prd-main-73t8, discord-sessions-prd-1-5)
+butt:  5
+butt:  4
+2017-10-30 20:00:54 | [1;33m[WARNING][0m | Shard 0 : 1001 - CloudFlare WebSocket proxy restarting
+2017-10-30 20:00:54 | [1;32m[INFO]   [0m | Shard 0 : Disconnected
+2017-10-30 20:00:54 | [1;32m[INFO]   [0m | Shard 0 : Reconnecting after 966 ms...
+2017-10-30 20:00:55 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-30 20:00:55 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-7917)
+2017-10-30 20:00:55 | [1;32m[INFO]   [0m | Shard 0 : Received RESUMED (gateway-prd-main-7917, discord-sessions-prd-1-5)
+butt:  2
+butt:  2
+butt:  4
+butt:  2
+butt:  5
+butt:  5
+butt:  4
+butt:  1
+butt:  5
+butt:  3
+butt:  3
+butt:  5
+butt:  1
+butt:  5
+[01:19:47 2017-10-31] command: GR, author: sizzlebiscuits, content: The Cybernetic Tea Shop
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=The+Cybernetic+Tea+Shop
+    book found with bookid: 28421799
+end 
+
+[01:23:36 2017-10-31] command: GR, author: toastyfrog, content: down among the sticks and bones
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=down+among+the+sticks+and+bones
+    book found with bookid: 31450908
+end 
+
+butt:  1
+[01:26:02 2017-10-31] command: GR, author: toastyfrog, content: every heart a doorway
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=every+heart+a+doorway
+    book found with bookid: 25526296
+end 
+
+butt:  5
+butt:  2
+[02:27:39 2017-10-31] command: GR, author: Excelsius, content: Minecraft the Village
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Minecraft+the+Village
+    book found with bookid: 25833981
+end 
+
+butt:  5
+butt:  4
+butt:  4
+butt:  5
+[03:28:24 2017-10-31] command: GR, author: Planet, content: the island max brooks
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=the+island+max+brooks
+    book found with bookid: 32736561
+end 
+
+2017-10-31 03:34:04 | [1;32m[INFO]   [0m | Shard 0 : Disconnected
+2017-10-31 03:34:04 | [1;32m[INFO]   [0m | Shard 0 : Reconnecting after 916 ms...
+2017-10-31 03:34:05 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 03:34:05 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-qmd7)
+2017-10-31 03:34:05 | [1;32m[INFO]   [0m | Shard 0 : Received RESUMED (gateway-prd-main-qmd7, discord-sessions-prd-1-5)
+[03:36:57 2017-10-31] command: GR, author: Excelsius, content: WOrld war z
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=WOrld+war+z
+    book found with bookid: 8908
+end 
+
+butt:  3
+butt:  3
+butt:  4
+2017-10-31 16:35:38 | [1;32m[INFO]   [0m | Shard 0 : Disconnected
+2017-10-31 16:35:38 | [1;32m[INFO]   [0m | Shard 0 : Reconnecting after 934 ms...
+2017-10-31 16:35:39 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 16:35:39 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-gtjn)
+2017-10-31 16:35:39 | [1;32m[INFO]   [0m | Shard 0 : Received RESUMED (gateway-prd-main-gtjn, discord-sessions-prd-1-5)
+2017-10-31 16:47:41 | [1;32m[INFO]   [0m | Shard 0 : Disconnected
+2017-10-31 16:47:41 | [1;32m[INFO]   [0m | Shard 0 : Reconnecting after 928 ms...
+2017-10-31 16:47:43 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 16:47:43 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-zm0f)
+2017-10-31 16:47:43 | [1;32m[INFO]   [0m | Shard 0 : Received RESUMED (gateway-prd-main-zm0f, discord-sessions-prd-1-5)
+butt:  3
+2017-10-31 19:26:30 | [1;32m[INFO]   [0m | Shard 0 : Disconnected
+2017-10-31 19:26:30 | [1;32m[INFO]   [0m | Shard 0 : Reconnecting after 925 ms...
+2017-10-31 19:26:31 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 19:26:31 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-v5x4)
+2017-10-31 19:26:31 | [1;32m[INFO]   [0m | Shard 0 : Received RESUMED (gateway-prd-main-v5x4, discord-sessions-prd-1-5)
+butt:  1
+[21:07:39 2017-10-31] command: GR, author: pikarumple, content: Dearly departed lia habel
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Dearly+departed+lia+habel
+    book found with bookid: 10048874
+end 
+
+2017-10-31 23:37:38 | [1;32m[INFO]   [0m | Shard 0 : Disconnected
+2017-10-31 23:37:38 | [1;32m[INFO]   [0m | Shard 0 : Reconnecting after 1086 ms...
+2017-10-31 23:37:39 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-10-31 23:37:39 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-t111)
+2017-10-31 23:37:39 | [1;32m[INFO]   [0m | Shard 0 : Received RESUMED (gateway-prd-main-t111, discord-sessions-prd-1-5)
+[23:38:23 2017-10-31] command: GR, author: cat, content: horrorstör
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=horrorstör
+    book found with bookid: 13129925
+end 
+
+butt:  3
+[01:04:19 2017-11-01] command: GR, author: Excelsius, content: Cases that haunt us
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Cases+that+haunt+us
+    book found with bookid: 94340
+end 
+
+[01:07:27 2017-11-01] command: GR, author: ☕CoffeeDylan🎃, content: a romance book
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=a+romance+book
+    book found with bookid: 7190
+end 
+
+[01:08:15 2017-11-01] command: GR, author: ☕CoffeeDylan🎃, content: the falt in our stars
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=the+falt+in+our+stars
+    book found with bookid: 11870085
+end 
+
+[01:08:41 2017-11-01] command: GR, author: Wolvesand, content: wallbanger
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=wallbanger
+    book found with bookid: 15858248
+end 
+
+[01:35:46 2017-11-01] command: GR, author: Excelsius, content: Hank Green
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Hank+Green
+    book found with bookid: 22838463
+end 
+
+[01:37:01 2017-11-01] command: GR, author: Excelsius, content: Turtle Hank Green
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Turtle+Hank+Green
+    no results found
+end 
+
+[01:38:24 2017-11-01] command: GR, author: Excelsius, content: Turtles all the way down
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Turtles+all+the+way+down
+    book found with bookid: 35504431
+end 
+
+butt:  2
+butt:  3
+butt:  5
+butt:  5
+butt:  5
+butt:  1
+butt:  5
+butt:  5
+butt:  3
+butt:  1
+butt:  2
+butt:  4
+[19:29:57 2017-11-01] command: GR, author: Excelsius, content: Ravine
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Ravine
+    book found with bookid: 19520036
+end 
+
+[19:29:57 2017-11-01] command: GR, author: Excelsius, content: Ravaine
+    UPDATED
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Ravaine
+    book found with bookid: 17194569
+end 
+
+[19:52:30 2017-11-01] command: GR, author: Emmie, content: Papergirls
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Papergirls
+    book found with bookid: 34933229
+end 
+
+[19:52:30 2017-11-01] command: GR, author: Emmie, content: Paper Girls
+    UPDATED
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Paper+Girls
+    book found with bookid: 28204534
+end 
+
+[19:58:53 2017-11-01] command: GR, author: Boogston, content: Clean Room
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Clean+Room
+    book found with bookid: 28109912
+end 
+
+[19:59:12 2017-11-01] command: GR, author: Boogston, content: Spell on wheels
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Spell+on+wheels
+    book found with bookid: 32441262
+end 
+
+[20:02:57 2017-11-01] command: GR, author: Emmie, content: Motor Crush
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Motor+Crush
+    book found with bookid: 33566369
+end 
+
+[20:02:57 2017-11-01] command: GR, author: Tali, content: Gunnerkrigg Court
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Gunnerkrigg+Court
+    book found with bookid: 2915026
+end 
+
+[20:04:15 2017-11-01] command: GR, author: russian blue, content: Ava's Demon
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Ava's+Demon
+    book found with bookid: 18043803
+end 
+
+[20:06:25 2017-11-01] command: GR, author: AReasonWhy, content: kill 6 billion demons
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=kill+6+billion+demons
+    book found with bookid: 31387194
+end 
+
+[20:08:45 2017-11-01] command: GR, author: AReasonWhy, content: Lumberjanes
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Lumberjanes
+    book found with bookid: 25088104
+end 
+
+[20:13:10 2017-11-01] command: GR, author: AReasonWhy, content: Lost at sea
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Lost+at+sea
+    book found with bookid: 564758
+end 
+
+[22:01:41 2017-11-01] command: GR, author: cat, content: princess princess ever after
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=princess+princess+ever+after
+    book found with bookid: 30025791
+end 
+
+butt:  2
+butt:  4
+butt:  4
+butt:  5
+butt:  4
+butt:  2
+[00:15:55 2017-11-02] command: GR, author: sizzlebiscuits, content: tomie
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=tomie
+    book found with bookid: 29632242
+end 
+
+butt:  2
+butt:  4
+butt:  5
+butt:  3
+[01:46:29 2017-11-02] command: GR, author: Ansel, content: Vicious Schwab
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Vicious+Schwab
+    book found with bookid: 13638125
+end 
+
+[01:47:07 2017-11-02] command: GR, author: Ansel, content: Rogue One
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Rogue+One
+    book found with bookid: 278108
+end 
+
+[01:48:05 2017-11-02] command: GR, author: Emmie, content: Rogue One : A Star Wars Story
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Rogue+One+:+A+Star+Wars+Story
+    book found with bookid: 30008713
+end 
+
+butt:  4
+butt:  2
+[06:12:04 2017-11-02] command: GR, author: toastyfrog, content: Stitch n bitch
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Stitch+n+bitch
+    book found with bookid: 57509
+end 
+
+[06:12:04 2017-11-02] command: GR, author: toastyfrog, content: Stitch n bitch
+    DELETED
+end 
+
+[06:13:16 2017-11-02] command: GR, author: toastyfrog, content: Stitch n bitch the knitter's handbook
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Stitch+n+bitch+the+knitter's+handbook
+    book found with bookid: 57508
+end 
+
+[06:21:16 2017-11-02] command: GR, author: toastyfrog, content: lost city of the monkey god
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=lost+city+of+the+monkey+god
+    book found with bookid: 30145126
+end 
+
+2017-11-02 10:54:06 | [1;32m[INFO]   [0m | Shard 0 : Disconnected
+2017-11-02 10:54:06 | [1;32m[INFO]   [0m | Shard 0 : Reconnecting after 995 ms...
+2017-11-02 10:54:08 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 10:54:08 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-sd7x)
+2017-11-02 10:54:08 | [1;32m[INFO]   [0m | Shard 0 : Received RESUMED (gateway-prd-main-sd7x, discord-sessions-prd-1-5)
+2017-11-02 15:49:04 | [1;33m[WARNING][0m | Shard 0 : Previous heartbeat not acknowledged
+2017-11-02 16:04:33 | [1;32m[INFO]   [0m | Shard 0 : Disconnected
+2017-11-02 16:04:33 | [1;32m[INFO]   [0m | Shard 0 : Reconnecting...
+2017-11-02 16:04:33 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 16:04:33 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-3zgs)
+2017-11-02 16:04:33 | [1;32m[INFO]   [0m | Shard 0 : Session invalidated, re-identifying...
+2017-11-02 16:04:36 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-3zgs, discord-sessions-prd-1-9)
+Logged in as BooksandTea-Bot
+
+[17:12:16 2017-11-02] command: GR, author: Emmie, content: Norse Mythology
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=Norse+Mythology
+    book found with bookid: 30831912
+end 
+
+[17:19:06 2017-11-02] command: GR, author: satho, content: parable of the sower
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=parable+of+the+sower
+    book found with bookid: 52397
+end 
+
+butt:  4
+butt:  2
+butt:  1
+butt:  2
+butt:  1
+butt:  5
+[20:51:12 2017-11-02] command: GR, author: XIJ3S0NXX385, content: The Mayflyt
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=The+Mayflyt
+    book found with bookid: 17190180
+end 
+
+[20:51:26 2017-11-02] command: GR, author: XIJ3S0NXX385, content: The Mayfly james hazel
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=The+Mayfly+james+hazel
+    book found with bookid: 34741129
+end 
+
+[20:51:12 2017-11-02] command: GR, author: XIJ3S0NXX385, content: The Mayflyt
+    DELETED
+end 
+
+[20:56:10 2017-11-02] command: GR, author: Ralthuis, content: hi
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=hi
+    book found with bookid: 17243953
+end 
+
+[20:56:10 2017-11-02] command: GR, author: Ralthuis, content: hi
+    DELETED
+end 
+
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-02 20:57:58 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-02 20:57:58 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-02 20:57:59 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-02 20:57:59 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-02 20:57:59 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 20:57:59 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-xqlf)
+2017-11-02 20:58:00 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-xqlf, discord-sessions-prd-1-7)
+Logged in as BooksandTea-Bot
+
+[20:58:02 2017-11-02] command: GR, author: Ralthuis, content: hi
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=hi
+    book found with bookid: 17243953
+end 
+
+[20:58:02 2017-11-02] command: GR, author: Ralthuis, content: hi
+    DELETED
+end 
+
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-02 20:59:38 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-02 20:59:38 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-02 20:59:38 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-02 20:59:38 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-02 20:59:38 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 20:59:38 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-4wd1)
+2017-11-02 20:59:38 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-4wd1, discord-sessions-prd-1-16)
+Logged in as BooksandTea-Bot
+
+[20:59:42 2017-11-02] command: GR, author: Ralthuis, content: fds
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=fds
+    book found with bookid: 28548075
+end 
+
+[20:59:42 2017-11-02] command: GR, author: Ralthuis, content: fds
+    DELETED
+end 
+
+[21:01:03 2017-11-02] command: GR, author: Ralthuis, content: hi
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=hi
+    book found with bookid: 17243953
+end 
+
+[21:01:03 2017-11-02] command: GR, author: Ralthuis, content: sdf
+    UPDATED
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=sdf
+    book found with bookid: 33861374
+end 
+
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-02 21:02:50 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-02 21:02:50 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-02 21:02:50 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:02:50 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-02 21:02:51 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:02:51 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-2mlw)
+2017-11-02 21:02:51 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-2mlw, discord-sessions-prd-1-8)
+Logged in as BooksandTea-Bot
+
+[21:02:55 2017-11-02] command: GR, author: Ralthuis, content: hi
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=hi
+    book found with bookid: 17243953
+end 
+
+[21:02:55 2017-11-02] command: GR, author: Ralthuis, content: hi
+    DELETED
+end 
+
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-02 21:04:29 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-02 21:04:29 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-02 21:04:29 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:04:29 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-02 21:04:30 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:04:30 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-s0b0)
+2017-11-02 21:04:30 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-s0b0, discord-sessions-prd-1-9)
+Logged in as BooksandTea-Bot
+
+[21:04:34 2017-11-02] command: GR, author: Ralthuis, content: hi
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=hi
+    book found with bookid: 17243953
+end 
+
+[21:04:34 2017-11-02] command: GR, author: Ralthuis, content: hi
+    DELETED
+end 
+
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-02 21:05:36 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-02 21:05:36 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-02 21:05:37 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:05:37 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-02 21:05:37 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:05:37 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-qgwq)
+2017-11-02 21:05:37 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-qgwq, discord-sessions-prd-1-4)
+Logged in as BooksandTea-Bot
+
+[21:06:47 2017-11-02] command: GR, author: Ralthuis, content: sdf
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=sdf
+    book found with bookid: 33861374
+end 
+
+[21:06:47 2017-11-02] command: GR, author: Ralthuis, content: sdf
+    DELETED
+end 
+
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-02 21:07:08 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-02 21:07:08 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-02 21:07:08 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:07:08 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-02 21:07:09 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:07:09 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-xd9x)
+2017-11-02 21:07:09 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-xd9x, discord-sessions-prd-1-4)
+Logged in as BooksandTea-Bot
+
+[21:07:14 2017-11-02] command: GR, author: Ralthuis, content: sdf
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=sdf
+    book found with bookid: 33861374
+end 
+
+[21:07:14 2017-11-02] command: GR, author: Ralthuis, content: sdf
+    DELETED
+end 
+
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-02 21:09:48 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-02 21:09:48 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-02 21:09:49 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-02 21:09:49 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-02 21:09:49 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-02 21:09:49 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-p1np)
+2017-11-02 21:09:49 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-p1np, discord-sessions-prd-1-1)
+Logged in as BooksandTea-Bot
+
+[21:09:51 2017-11-02] command: GR, author: Ralthuis, content: sdf
+    url: https://www.goodreads.com/search.xml?key=A570C6wsV99cjirV1CztSQ+&q=sdf
+    book found with bookid: 33861374
+end 
+
+[21:09:51 2017-11-02] command: GR, author: Ralthuis, content: sdf
+    DELETED
+testtest
+deleting message
+BooksandTea-Bot
+end 
+
