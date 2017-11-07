@@ -12,6 +12,7 @@ local messQueue = {} -- List of messages still to be handled
 local optionList = {} -- List {"command", func} of all commands and corresponding functions
 
 local function funstuff(message)
+    -- I LOVE BUTBOTT
     if message.author.name == "Buttbot" then
 	local r = math.random(5)
         print("butt:  " .. r)
@@ -19,10 +20,28 @@ local function funstuff(message)
             message:addReaction("\xE2\x9D\xA4")
 	end
     end
+    
+    -- HAUNTING EMMIE :)
     if message.author.name == "Emmie" then
         local r = math.random(50)
         if r == 1 then
             message:addReaction("\xF0\x9F\x91\xBB")
+        end
+    end
+
+    -- THIS IS A DRINKING GAME
+    if message.channel.mentionString ~= "<#302884873729867777>" then
+    -- 302884873729867777 is the id for cosmere channel
+	local wordlist = {"Sanderson","sanderson","cosmere","Cosmere"}
+	local result = nil
+        for key, val in ipairs(wordlist) do
+	    result = string.find(message.content, val)
+            if result ~= nil then
+		break
+            end
+	end
+	if result ~= nil then
+	    message:addReaction("\xF0\x9F\x8D\xBA")
         end
     end
 end
