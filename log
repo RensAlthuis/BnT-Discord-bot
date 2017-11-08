@@ -5662,3 +5662,20 @@ starting bot
 2017-11-08 01:24:32 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-cr3x, discord-sessions-prd-1-15)
 Logged in as BooksandTea-Bot
 
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-08 01:32:00 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-08 01:32:00 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-08 01:32:00 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:32:00 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-08 01:32:00 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:32:00 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-2mlw)
+2017-11-08 01:32:01 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-2mlw, discord-sessions-prd-1-5)
+Logged in as BooksandTea-Bot
+

@@ -1172,3 +1172,10 @@
 2017-11-08 01:24:32 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
 2017-11-08 01:24:32 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-cr3x)
 2017-11-08 01:24:32 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-cr3x, discord-sessions-prd-1-15)
+2017-11-08 01:32:00 | [INFO]    | Discordia 2.1.0
+2017-11-08 01:32:00 | [INFO]    | Connecting to Discord...
+2017-11-08 01:32:00 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:32:00 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-08 01:32:00 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:32:00 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-2mlw)
+2017-11-08 01:32:01 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-2mlw, discord-sessions-prd-1-5)

@@ -38,7 +38,7 @@ local function funstuff(message)
         for key, val in ipairs(wordlist) do
             str = ""
             val:gsub(".", function(c)
-                str = str .. c .. "%a*"
+                str = str .. c .. "%S*"
             end)
             result = string.find(tosearch, str)
             if result ~= nil then
