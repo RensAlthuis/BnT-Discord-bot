@@ -1123,3 +1123,52 @@
 2017-11-07 23:45:47 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
 2017-11-07 23:45:47 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-sgsg)
 2017-11-07 23:45:48 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-sgsg, discord-sessions-prd-1-5)
+2017-11-08 01:13:15 | [INFO]    | Discordia 2.1.0
+2017-11-08 01:13:15 | [INFO]    | Connecting to Discord...
+2017-11-08 01:13:15 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:13:15 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-08 01:13:15 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:13:15 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-ls83)
+2017-11-08 01:13:15 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-ls83, discord-sessions-prd-1-13)
+2017-11-08 01:16:16 | [INFO]    | Discordia 2.1.0
+2017-11-08 01:16:16 | [INFO]    | Connecting to Discord...
+2017-11-08 01:16:17 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:16:17 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-08 01:16:17 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:16:17 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-sd7x)
+2017-11-08 01:16:17 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-sd7x, discord-sessions-prd-1-14)
+2017-11-08 01:18:14 | [INFO]    | Discordia 2.1.0
+2017-11-08 01:18:14 | [INFO]    | Connecting to Discord...
+2017-11-08 01:18:14 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:18:14 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-08 01:18:15 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:18:15 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-286p)
+2017-11-08 01:18:15 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-286p, discord-sessions-prd-1-2)
+2017-11-08 01:19:11 | [INFO]    | Discordia 2.1.0
+2017-11-08 01:19:11 | [INFO]    | Connecting to Discord...
+2017-11-08 01:19:11 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:19:11 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-08 01:19:12 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:19:12 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-pfvz)
+2017-11-08 01:19:12 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-pfvz, discord-sessions-prd-1-3)
+2017-11-08 01:20:07 | [INFO]    | Discordia 2.1.0
+2017-11-08 01:20:07 | [INFO]    | Connecting to Discord...
+2017-11-08 01:20:07 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:20:07 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-08 01:20:08 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:20:08 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-zm0f)
+2017-11-08 01:20:08 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-zm0f, discord-sessions-prd-1-10)
+2017-11-08 01:23:20 | [INFO]    | Discordia 2.1.0
+2017-11-08 01:23:20 | [INFO]    | Connecting to Discord...
+2017-11-08 01:23:20 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:23:20 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-08 01:23:20 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:23:20 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-qmd7)
+2017-11-08 01:23:20 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-qmd7, discord-sessions-prd-1-15)
+2017-11-08 01:24:31 | [INFO]    | Discordia 2.1.0
+2017-11-08 01:24:31 | [INFO]    | Connecting to Discord...
+2017-11-08 01:24:31 | [INFO]    | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:24:31 | [INFO]    | Launching shard 0 (1 out of 1)...
+2017-11-08 01:24:32 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:24:32 | [INFO]    | Shard 0 : Received HELLO (gateway-prd-main-cr3x)
+2017-11-08 01:24:32 | [INFO]    | Shard 0 : Received READY (gateway-prd-main-cr3x, discord-sessions-prd-1-15)

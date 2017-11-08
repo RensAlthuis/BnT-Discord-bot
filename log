@@ -5449,3 +5449,216 @@ starting bot
 2017-11-07 23:45:48 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-sgsg, discord-sessions-prd-1-5)
 Logged in as BooksandTea-Bot
 
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-08 01:13:15 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-08 01:13:15 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-08 01:13:15 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:13:15 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-08 01:13:15 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:13:15 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-ls83)
+2017-11-08 01:13:15 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-ls83, discord-sessions-prd-1-13)
+Logged in as BooksandTea-Bot
+
+Uncaught Error: ...Documents/Projects/BnT-Discord-bot/deps/coro-channel.lua:62: ...ts/BnT-Discord-bot/deps/discordia/libs/utils/Emitter.lua:53: /home/rens/Documents/Projects/BnT-Discord-bot/bot.lua:40: bad argument #1 to 'pairs' (table expected, got string)
+stack traceback:
+	[C]: in function 'assert'
+	...Documents/Projects/BnT-Discord-bot/deps/coro-channel.lua:62: in function 'onPlain'
+	.../Projects/BnT-Discord-bot/deps/secure-socket/biowrap.lua:76: in function <.../Projects/BnT-Discord-bot/deps/secure-socket/biowrap.lua:61>
+	[C]: in function 'run'
+	[string "bundle:init.lua"]:52: in function <[string "bundle:init.lua"]:47>
+	[C]: in function 'xpcall'
+	[string "bundle:init.lua"]:47: in function 'fn'
+	[string "bundle:deps/require.lua"]:310: in function <[string "bundle:deps/require.lua"]:266>
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-08 01:16:16 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-08 01:16:16 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-08 01:16:17 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:16:17 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-08 01:16:17 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:16:17 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-sd7x)
+2017-11-08 01:16:17 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-sd7x, discord-sessions-prd-1-14)
+Logged in as BooksandTea-Bot
+
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+.*S%a*a%a*n%a*d%a*e%a*r%a*s%a*o%a*n%a*
+.*C%a*o%a*s%a*m%a*e%a*r%a*e%a*
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-08 01:18:14 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-08 01:18:14 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-08 01:18:14 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:18:14 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-08 01:18:15 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:18:15 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-286p)
+2017-11-08 01:18:15 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-286p, discord-sessions-prd-1-2)
+Logged in as BooksandTea-Bot
+
+nil
+nil
+nil
+nil
+nil
+nil
+1
+nil
+nil
+nil
+nil
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-08 01:19:11 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-08 01:19:11 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-08 01:19:11 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:19:11 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-08 01:19:12 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:19:12 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-pfvz)
+2017-11-08 01:19:12 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-pfvz, discord-sessions-prd-1-3)
+Logged in as BooksandTea-Bot
+
+1
+nil
+nil
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-08 01:20:07 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-08 01:20:07 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-08 01:20:07 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:20:07 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-08 01:20:08 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:20:08 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-zm0f)
+2017-11-08 01:20:08 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-zm0f, discord-sessions-prd-1-10)
+Logged in as BooksandTea-Bot
+
+1
+nil
+nil
+1
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+1
+2
+31
+31
+nil
+nil
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-08 01:23:20 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-08 01:23:20 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-08 01:23:20 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:23:20 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-08 01:23:20 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:23:20 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-qmd7)
+2017-11-08 01:23:20 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-qmd7, discord-sessions-prd-1-15)
+Logged in as BooksandTea-Bot
+
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+nil
+loading commands
+    found command: GR, isOn: true
+    found command: buttbook, isOn: true
+    found command: giveaway, isOn: false
+    found command: ping, isOn: false
+end
+
+starting bot
+2017-11-08 01:24:31 | [1;32m[INFO]   [0m | Discordia 2.1.0
+2017-11-08 01:24:31 | [1;32m[INFO]   [0m | Connecting to Discord...
+2017-11-08 01:24:31 | [1;32m[INFO]   [0m | Authenticated as BooksandTea-Bot#5597
+2017-11-08 01:24:31 | [1;32m[INFO]   [0m | Launching shard 0 (1 out of 1)...
+2017-11-08 01:24:32 | [1;32m[INFO]   [0m | Shard 0 : Connected to wss://gateway.discord.gg
+2017-11-08 01:24:32 | [1;32m[INFO]   [0m | Shard 0 : Received HELLO (gateway-prd-main-cr3x)
+2017-11-08 01:24:32 | [1;32m[INFO]   [0m | Shard 0 : Received READY (gateway-prd-main-cr3x, discord-sessions-prd-1-15)
+Logged in as BooksandTea-Bot
+

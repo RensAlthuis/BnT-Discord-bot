@@ -16,11 +16,11 @@ local function funstuff(message)
     if message.author.name == "Buttbot" then
 	local r = math.random(5)
         print("butt:  " .. r)
-	if r == 1 then
-            message:addReaction("\xE2\x9D\xA4")
-	end
+        if r == 1 then
+                message:addReaction("\xE2\x9D\xA4")
+        end
     end
-    
+
     -- HAUNTING EMMIE :)
     if message.author.name == "Emmie" then
         local r = math.random(50)
@@ -32,16 +32,21 @@ local function funstuff(message)
     -- THIS IS A DRINKING GAME
     if message.channel.mentionString ~= "<#302884873729867777>" then
     -- 302884873729867777 is the id for cosmere channel
-	local wordlist = {"Sanderson","sanderson","cosmere","Cosmere"}
+	local wordlist = {"sanderson","cosmere"}
+    local tosearch = string.lower(message.content)
 	local result = nil
         for key, val in ipairs(wordlist) do
-	    result = string.find(message.content, val)
+            str = ""
+            val:gsub(".", function(c)
+                str = str .. c .. "%a*"
+            end)
+            result = string.find(tosearch, str)
             if result ~= nil then
-		break
+                break
             end
-	end
-	if result ~= nil then
-	    message:addReaction("\xF0\x9F\x8D\xBA")
+        end
+        if result ~= nil then
+            message:addReaction("\xF0\x9F\x8D\xBA")
         end
     end
 end
