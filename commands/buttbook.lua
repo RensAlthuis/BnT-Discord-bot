@@ -110,7 +110,7 @@ local function init(cl)
     return{
         run = run,
         del = del,
-        ['isOn'] = true
+        ['isOn'] = false
     }
 end
 return { init = init }
