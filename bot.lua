@@ -34,19 +34,21 @@ local function funstuff(message)
     -- 302884873729867777 is the id for cosmere channel
 	local wordlist = {"sanderson","cosmere"}
     local tosearch = string.lower(message.content)
-	local result = nil
-        for key, val in ipairs(wordlist) do
-            str = ""
-            val:gsub(".", function(c)
-                str = str .. c .. "%S*"
-            end)
-            result = string.find(tosearch, str)
-            if result ~= nil then
-                break
+	local result = tosearch:find("http")
+        if result ~= 1 then
+            for key, val in ipairs(wordlist) do
+                str = ""
+                val:gsub(".", function(c)
+                    str = str .. c .. "%S*"
+                end)
+                result = string.find(tosearch, str)
+                if result ~= nil then
+                    break
+                end
             end
-        end
-        if result ~= nil then
-            message:addReaction("\xF0\x9F\x8D\xBA")
+            if result ~= nil then
+                message:addReaction("\xF0\x9F\x8D\xBA")
+            end
         end
     end
 end
