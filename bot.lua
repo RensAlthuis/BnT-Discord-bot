@@ -33,20 +33,25 @@ local function funstuff(message)
     if message.channel.mentionString ~= "<#302884873729867777>" then
     -- 302884873729867777 is the id for cosmere channel
 	local wordlist = {"sanderson","cosmere"}
-    local tosearch = string.lower(message.content)
-	local result = tosearch:find("http")
-        if result ~= 1 then
-            for key, val in ipairs(wordlist) do
-                str = ""
-                val:gsub(".", function(c)
-                    str = str .. c .. "%S*"
-                end)
-                result = string.find(tosearch, str)
-                if result ~= nil then
-                    break
-                end
-            end
+        local tosearch = string.lower(message.content)
+        for key, val in ipairs(wordlist) do
+            str = "%S*"
+            val:gsub(".", function(c)
+                str = str .. c .. "%S*"
+            end)
+            result = string.match(tosearch, str)
             if result ~= nil then
+		result = string.find(result, "https?://")
+		if result ~= 1 then
+		    result = 1
+                    break
+		else
+	            result = nil
+		end
+            end
+        end
+        if result ~= nil then
+	    if message.author.name ~= "Ralthuis" then
                 message:addReaction("\xF0\x9F\x8D\xBA")
             end
         end
