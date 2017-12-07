@@ -5,7 +5,8 @@ keyfile = args[2]
 
 client:on('ready', function()
     blocked = false
-	print('Logged in as ' .. client.user.username .. '\n')
+    client:setUsername("BooksAndTreats-Bot")
+    print('Logged in as ' .. client.user.username .. '\n')
 end)
 
 local messQueue = {} -- List of messages still to be handled
@@ -22,12 +23,12 @@ local function funstuff(message)
     end
 
     -- HAUNTING EMMIE :)
-    if message.author.name == "Emmie" then
-        local r = math.random(50)
-        if r == 1 then
-            message:addReaction("\xF0\x9F\x91\xBB")
-        end
-    end
+    --if message.author.name == "Emmie" then
+    --    local r = math.random(50)
+    --    if r == 1 then
+    --        message:addReaction("\xF0\x9F\x91\xBB")
+    --    end
+    --end
 
     -- THIS IS A DRINKING GAME
     if message.channel.mentionString ~= "<#302884873729867777>" then

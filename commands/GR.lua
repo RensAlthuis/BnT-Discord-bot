@@ -67,7 +67,7 @@ local function updateMess(bookid, message)
     if mess == nil then
         print('    no message found')
     else
-        if mess.author.name == 'BooksandTea-Bot' then
+        if mess.author.name == client.user.username then
             if bookid ~= nil then
                 mess:setContent("https://www.goodreads.com/book/show/" .. bookid)
             else
@@ -107,6 +107,7 @@ local function run(message, content)
 end
 
 local function del(message, content)
+    print('    entering del')
     local res = message.channel:getMessagesAfter(message, 1)
     local mess = nil
 
@@ -117,7 +118,8 @@ local function del(message, content)
     if mess == nil then
         print('    no message found')
     else
-        if mess.author.name == 'BooksandTea-Bot' then
+	print('    message found: ' .. mess.content)
+        if mess.author.name == client.user.username then
             mess.delete(mess)
         end
 
@@ -140,7 +142,7 @@ local function update(message, content)
 	return
     else
     
-        if mess.author.name == 'BooksandTea-Bot' then
+        if mess.author.name == client.user.username then
             host = "https://www.goodreads.com"
             searchUrl = host .. '/search.xml?key=' .. GRkey .. '&q=' .. content
             searchUrl = string.gsub(searchUrl, '%s', '+')
