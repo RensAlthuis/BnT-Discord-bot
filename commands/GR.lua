@@ -135,9 +135,7 @@ local function update(message, content)
     for v in res:iter() do
         mess = v
     end
-
-    if mess == nil then
-        print('    no message found')
+if mess == nil then print('    no message found')
         client:emit('messageFinished')
 	return
     else
@@ -178,6 +176,7 @@ local function init(cl)
         run = run,
         del = del,
         update = update,
+        ['trigger'] = "testing",
         ['isOn'] = true
     }
 end

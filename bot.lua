@@ -5,7 +5,7 @@ keyfile = args[2]
 
 client:on('ready', function()
     blocked = false
-    client:setUsername("BooksAndTreats-Bot")
+    client:setUsername("BooksAndTea-Bot")
     print('Logged in as ' .. client.user.username .. '\n')
 end)
 
@@ -16,7 +16,6 @@ local function funstuff(message)
     -- I LOVE BUTBOTT
     if message.author.name == "Buttbot" then
 	local r = math.random(5)
-        print("butt:  " .. r)
         if r == 1 then
                 message:addReaction("\xE2\x9D\xA4")
         end
@@ -65,8 +64,13 @@ local function checkMessage(message)
         local option, content = string.match(message.content, "(%g*)%s?(.*)", 2)
         if option ~= nil and content ~= nil then
             if optionList[option] ~= nil then
+                date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
+                print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
                 if optionList[option].isOn == true then
                     return true, option, content
+                else
+                    print('     Ignoring Command: disabled')
+                    print('end')
                 end
             end
         end
@@ -85,8 +89,6 @@ function create(message)
         --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
         if blocked == false then
             blocked = true
-            date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
-            print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
             client:emit(option..'RUN', message, content)
         else
             table.insert(messQueue, 1, message)
@@ -109,7 +111,7 @@ function delete(message)
             print("    DELETED")
 	    if optionList[option].del ~= nil then
                 client:emit(option..'DEL', message, content)
-            else 
+            else
                 client:emit("messageFinished");
             end
         else
@@ -165,30 +167,33 @@ local function setupCommands(err, file)
     for k,v in pairs(file) do
 
         local command = string.match(v, '(.-).lua')
-	if command ~= nil then
-		optionList[command] = require('./commands/' .. v).init(client)
-		print('    found command: ' .. command .. ', isOn: ' .. tostring(optionList[command].isOn))
+        if command ~= nil then
+            cmdObj = require('./commands/' .. v).init(client)
 
-		--set listeners for all commands in optionsList
-		if optionList[command].isOn == true then
-            if optionList[command].run ~= nil then
-                client:on(command .. 'RUN', optionList[command].run)
+            if cmdObj.trigger == nil then
+                print('    Warning: no trigger specified')
+                cmdObj.trigger = command
             end
 
-            if optionList[command].del ~= nil then
-                client:on(command .. 'DEL', optionList[command].del)
+            print('    found command: ' .. cmdObj.trigger .. ', isOn: ' .. tostring(cmdObj.isOn))
+
+            if cmdObj.run ~= nil then
+                client:on(cmdObj.trigger .. 'RUN', cmdObj.run)
             end
 
-            if optionList[command].update ~= nil then
-                client:on(command .. 'UPDATE', optionList[command].update)
+            if cmdObj.del ~= nil then
+                client:on(cmdObj.trigger .. 'DEL', cmdObj.del)
             end
-		end
-	end
+
+            if cmdObj.update ~= nil then
+                client:on(cmdObj.trigger .. 'UPDATE', cmdObj.update)
+            end
+
+            optionList[cmdObj.trigger] = cmdObj
+        end
     end
     print('end\n')
 end
-
-fs.readdir('./commands', setupCommands)
 
 -- start bot using key read from the file
 local function startBot(err, file)
@@ -202,5 +207,6 @@ local function startBot(err, file)
     client:run('Bot ' .. file)
 end
 
+fs.readdir('./commands', setupCommands)
 fs.readFile(keyfile, startBot)
 
