@@ -1,4 +1,3 @@
-client = nil
 local https = require("https")
 local xml = require('xmlSimple.lua').newParser()
 local response = ""
@@ -101,17 +100,14 @@ local function del(message)
     client:emit("messageFinished")
 end
 
-local function init(cl)
-    client = cl
-    readGRKey()
-    client:on('BB_chunk', chunk)
-    client:on('BB_postMess', postMess)
-    math.randomseed(os.time())
-    return{
-        run = run,
-        del = del,
-        ['isOn'] = false
-    }
-end
-return { init = init }
+client = cl
+readGRKey()
+client:on('BB_chunk', chunk)
+client:on('BB_postMess', postMess)
+math.randomseed(os.time())
+return{
+	run = run,
+	del = del,
+	['isOn'] = false
+}
 

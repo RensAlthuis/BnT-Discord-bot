@@ -166,19 +166,16 @@ if mess == nil then print('    no message found')
     end
 end
 
-local function init(cl)
-    client = cl
-    readGRKey()
-    client:on('GR_chunk', chunk)
-    client:on('GR_postMess', postMess)
-    client:on('GR_updateMess', updateMess)
-    return{
-        run = run,
-        del = del,
-        update = update,
-        ['trigger'] = "testing",
-        ['isOn'] = true
-    }
-end
-return { init = init }
+readGRKey()
+client:on('GR_chunk', chunk)
+client:on('GR_postMess', postMess)
+client:on('GR_updateMess', updateMess)
+
+return{
+	run = run,
+	del = del,
+	update = update,
+	['trigger'] = "GR",
+	['isOn'] = true
+}
 

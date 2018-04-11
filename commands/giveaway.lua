@@ -5,7 +5,6 @@
 --end time
 local timer = require('timer')
 local timerList = {}
-local client = nil
 
 local function timerCallback()
     for k,v in pairs(timerList) do
@@ -41,16 +40,12 @@ local function run(message, content)
     client:emit('messageFinished')
 end
 
-function init(cl)
-    client = cl
+client = cl
 
-    client:on('updatemessages', updateMessages)
+client:on('updatemessages', updateMessages)
 
-    timer.setInterval(1000, timerCallback)
-    return {
-        run = run,
-        ['isOn'] = false
-    }
-end
-
-return { init = init }
+timer.setInterval(1000, timerCallback)
+return {
+	run = run,
+	['isOn'] = false
+}
