@@ -40,11 +40,14 @@ local function run(message, content)
     client:emit('messageFinished')
 end
 
-client = cl
+local x = client:getListenerCount("updateMessages")
+if x ~= 0 then
+    client:removeAllListeners('updatemessages')
+end
 
 client:on('updatemessages', updateMessages)
-
 timer.setInterval(1000, timerCallback)
+
 return {
 	run = run,
 	['isOn'] = false

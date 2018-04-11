@@ -2,7 +2,7 @@ local https = require("https")
 local xml = require('xmlSimple.lua').newParser()
 local response = ""
 local fs = require('fs')
-GRkey = nil
+local GRkey = nil
 
 local function chunk(chunk)
     response = response .. chunk
@@ -102,6 +102,13 @@ end
 
 client = cl
 readGRKey()
+
+local x = client:getListenerCount("BB_chunk")
+if x ~= 0 then
+    client:removeAllListeners('BB_chunk')
+    client:removeAllListeners('BB_postMess')
+end
+
 client:on('BB_chunk', chunk)
 client:on('BB_postMess', postMess)
 math.randomseed(os.time())

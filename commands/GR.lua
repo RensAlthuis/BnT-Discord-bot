@@ -58,7 +58,7 @@ end
 
 local function updateMess(bookid, message)
     local res = message.channel:getMessagesAfter(message, 1)
-    local mess = nil 
+    local mess = nil
 
     for v in res:iter() do
         mess = v
@@ -130,7 +130,7 @@ end
 
 local function update(message, content)
     local res = message.channel:getMessagesAfter(message, 1)
-    local mess = nil 
+    local mess = nil
 
     for v in res:iter() do
         mess = v
@@ -139,34 +139,42 @@ if mess == nil then print('    no message found')
         client:emit('messageFinished')
 	return
     else
-    
+
         if mess.author.name == client.user.username then
             host = "https://www.goodreads.com"
             searchUrl = host .. '/search.xml?key=' .. GRkey .. '&q=' .. content
             searchUrl = string.gsub(searchUrl, '%s', '+')
-    
+
             print("    url: " .. searchUrl)
-    
+
             local req = https.get(searchUrl, function (res)
                 res:on('data', function (chunk)
                     client:emit('GR_chunk', chunk)
                 end)
-    
+
                 res:on('end', function()
                     bookid = result()
                     client:emit('GR_updateMess', bookid, message)
                 end)
             end)
-    
+
             req:done()
 	else
 	    print('    no message found')
-            client:emit("messageFinished") 
+            client:emit("messageFinished")
         end
     end
 end
 
 readGRKey()
+
+local x = client:getListenerCount("GR_chunk")
+if x ~= 0 then
+    client:removeAllListeners('GR_chunk')
+    client:removeAllListeners('GR_postMess')
+    client:removeAllListeners('GR_updateMess')
+end
+
 client:on('GR_chunk', chunk)
 client:on('GR_postMess', postMess)
 client:on('GR_updateMess', updateMess)

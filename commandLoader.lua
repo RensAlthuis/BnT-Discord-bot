@@ -43,14 +43,12 @@ local function loadCommand(filename)
                 if triggers[filename] then
 		    print('    Command already loaded, replacing')
                     client:removeListener(triggers[filename], pcallFunctionWrapper)
-		    print(' old listener count: ', client:getListenerCount(triggers[filename]))
                     optionList[triggers[filename]] = nil
                 end
 
                 client:on(cmdObj.trigger, pcallFunctionWrapper)
                 triggers[filename] = cmdObj.trigger
                 optionList[cmdObj.trigger] = cmdObj
-		print(' new listener count: ', client:getListenerCount(triggers[filename]))
             else
                 print(status, cmdObj)
             end
