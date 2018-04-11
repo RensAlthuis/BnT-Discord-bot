@@ -1,6 +1,6 @@
 client = nil
 local https = require("https")
-local xml = require('../deps/xmlSimple.lua').newParser()
+local xml = require('xmlSimple.lua').newParser()
 local response = ""
 local fs = require('fs')
 GRkey = nil
