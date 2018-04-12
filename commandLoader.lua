@@ -41,9 +41,12 @@ local function loadCommand(filename)
                 print('        Trigger: '.. cmdObj.trigger)
 
                 if triggers[filename] then
-		    print('    Command already loaded, replacing')
+                    print('    Command already loaded, replacing')
                     client:removeListener(triggers[filename], pcallFunctionWrapper)
                     optionList[triggers[filename]] = nil
+                    for k, v in pairs(trackedMessages) do
+                        v[triggers[filename]] = nil
+                    end
                 end
 
                 client:on(cmdObj.trigger, pcallFunctionWrapper)
@@ -66,6 +69,7 @@ local function setupCommands(err, file)
     for k,v in pairs(file) do
         loadCommand(v)
     end
+
     print('end\n')
 end
 

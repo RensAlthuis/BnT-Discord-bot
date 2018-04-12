@@ -22,7 +22,10 @@ funcList['exec'] = function(content)
     else
         if optionList[content] then
             if optionList[content].run then
-                optionList[content].run()
+                status, res = pcall(optionList[content].run)
+                if not status then
+                    print(res)
+                end
             end
         end
     end

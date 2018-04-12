@@ -1,6 +1,7 @@
 
 local messQueue = {} -- List of messages still to be handled
 local blocked = false
+local trackedMessages = {}
 
 -- Adding some memes to messages
 local function funstuff(message)
@@ -88,21 +89,13 @@ end
 -- When new message is created and checkmessage return true, add the call to the delete handler to the queue.
 local function delete(message)
     message._handler = delete
-
     ok, option, content = checkMessage(message)
 
     if ok then
         --Make sure we don't handle multiple messages at once by adding them to a queue while the handler is blocked
         if blocked == false then
             blocked = true
-            date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
-            print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
-            print("    DELETED")
-            if optionList[option].del ~= nil then
-                client:emit(option..'DEL', option, message, content)
-            else
-                client:emit("messageFinished");
-            end
+            client:emit(option, optionList[option].del, message, content)
         else
             table.insert(messQueue, 1, message)
         end
@@ -112,20 +105,12 @@ end
 -- When new message is created and checkmessage return true, add the call to the update handler to the queue.
 local function update(message)
     message._handler = update
-
     ok, option, content = checkMessage(message)
 
     if ok then
         if blocked == false then
             blocked = true
-            date, time = string.match(message.timestamp, "(%d+-%d+-%d+)T(%d+:%d+:%d+)")
-            print("[" .. time .. " " .. date .. "] command: " .. option .. ", author: " .. message.author.name .. ", content: " .. content)
-            print("    UPDATED")
-            if optionList[option].update ~= nil then
-                client:emit(option..'UPDATE', message, content)
-            else
-                client:emit("messageFinished");
-            end
+            client:emit(option, optionList[option].update, message, content)
         else
             table.insert(messQueue, 1, message)
         end
@@ -142,13 +127,25 @@ local function messageFinished()
     end
 end
 
+local function reactionAdd(reaction, userId)
+    if client:getUser(userId) ~= client.user then
+        if trackedMessages[reaction[1]] then
+            for k, v in pairs(trackedMessages[reaction[1]]) do
+                client:emit(k, v, reaction)
+            end
+        end
+    end
+end
+
 client:on('messageDelete', delete)
 client:on('messageUpdate', update)
 client:on('messageCreate', create)
 client:on('messageFinished', messageFinished)
+client:on('reactionAdd', reactionAdd)
 
 local function init(opt)
     optionList = opt
+    return {trackedMessages = trackedMessages}
 end
 
 return{

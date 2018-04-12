@@ -107,7 +107,7 @@ local function run(message, content)
 end
 
 local function del(message, content)
-    print('    entering del')
+    print('    Deleting message')
     local res = message.channel:getMessagesAfter(message, 1)
     local mess = nil
 
@@ -129,6 +129,7 @@ local function del(message, content)
 end
 
 local function update(message, content)
+    print('    Updating message')
     local res = message.channel:getMessagesAfter(message, 1)
     local mess = nil
 
