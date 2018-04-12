@@ -1,5 +1,5 @@
 local Date = discordia.Date
-local trigger = "b"
+local trigger = "bouncer"
 
 local function hasrole(guild, user, role)
     if user[7] then 
@@ -25,7 +25,7 @@ end
 local function run(message, content)
     local guild = client:getGuild('311229289536290823')
     for k,v in pairs(guild.members) do
-        local userHasRole= hasrole(guild, v, "Evil Overlord")
+        local userHasRole= hasrole(guild, v, "Hatchling")
         local date = Date.fromISO(v[4])
         local curdate = Date.fromSeconds(os.time())
         local x = curdate - date
