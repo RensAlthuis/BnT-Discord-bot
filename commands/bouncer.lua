@@ -14,32 +14,45 @@ end
 
 local function reaction(r)
     if r.emojiName == '✔' then
-        print('check', r.message._user)
+        print('Kicking user:', r.message._user.name)
+        r.message.guild:kickUser(r.message._user.id)
         r.message:delete()
-    elseif r.emojiName == '✖' then
-        print('cross', r.message._user)
+    elseif r.emojiName == '✖'then
         r.message:delete()
     end
 end
 
 local function run(message, content)
-    local guild = client:getGuild('311229289536290823')
+    local guild = message.guild
+    local role, time = string.match(content, "(.*)%s(%d*)")
+    time = tonumber(time)
+    print("    checking: " .. role)
+    print("    time: " .. time)
+    print(#guild.members)
+    local count = 0
     for k,v in pairs(guild.members) do
-        local userHasRole= hasrole(guild, v, "Hatchling")
-        local date = Date.fromISO(v[4])
-        local curdate = Date.fromSeconds(os.time())
-        local x = curdate - date
-        if userHasRole and x:toWeeks() > 2 then
-            mess = message.channel:send(v[6].name .. ", joined " .. tostring(curdate - date) .. " ago")
-            mess._user = v[6]
-            mess:addReaction('✖')
-            mess:addReaction('✔')
+        local userHasRole= hasrole(guild, v, role)
+	if v[4] ~= nil then
+		local date = Date.fromISO(v[4])
+		local curdate = Date.fromSeconds(os.time())
+		local x = curdate - date
+		if userHasRole and x:toDays() > time then
+		    print('    found: ' .. v[6].name)
+		    count = count + 1
+		    mess = message.channel:send(v[6].name .. ", joined " .. tostring(curdate - date) .. " ago")
+		    mess._user = v[6]
+		    mess:addReaction('✖')
+		    mess:addReaction('✔')
 
-            if trackedMessages[mess] == nil then
-                trackedMessages[mess] = {}
-            end
-            trackedMessages[mess][trigger] = reaction
-        end
+		    if trackedMessages[mess] == nil then
+			trackedMessages[mess] = {}
+		    end
+		    trackedMessages[mess][trigger] = reaction
+		end
+	end
+    end
+    if count == 0 then
+	message.channel:send("I'd like to do that, but there is no one left to kick. Chill maybe")
     end
     client:emit('messageFinished')
 end
