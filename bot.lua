@@ -46,4 +46,3 @@ end)
 fs.readFile(keyfile, startBot)
 process.stdin:on("data", ui.userInputHandler)
 
-

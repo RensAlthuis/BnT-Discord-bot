@@ -12,7 +12,7 @@ local function hasrole(guild, user, role)
     return false
 end
 
-local function reaction(r)
+local function trackedReaction(r)
     if r.emojiName == '✔' then
         print('Kicking user:', r.message._user.name)
         r.message.guild:kickUser(r.message._user.id)
@@ -32,33 +32,34 @@ local function run(message, content)
     local count = 0
     for k,v in pairs(guild.members) do
         local userHasRole= hasrole(guild, v, role)
-	if v[4] ~= nil then
-		local date = Date.fromISO(v[4])
-		local curdate = Date.fromSeconds(os.time())
-		local x = curdate - date
-		if userHasRole and x:toDays() > time then
-		    print('    found: ' .. v[6].name)
-		    count = count + 1
-		    mess = message.channel:send(v[6].name .. ", joined " .. tostring(curdate - date) .. " ago")
-		    mess._user = v[6]
-		    mess:addReaction('✖')
-		    mess:addReaction('✔')
+        if v[4] ~= nil then
+            local date = Date.fromISO(v[4])
+            local curdate = Date.fromSeconds(os.time())
+            local x = curdate - date
+            if userHasRole and x:toDays() > time then
+                print('    found: ' .. v[6].name)
+                count = count + 1
+                mess = message.channel:send(v[6].name .. ", joined " .. tostring(curdate - date) .. " ago")
+                mess._user = v[6]
+                mess:addReaction('✖')
+                mess:addReaction('✔')
 
-		    if trackedMessages[mess] == nil then
-			trackedMessages[mess] = {}
-		    end
-		    trackedMessages[mess][trigger] = reaction
-		end
-	end
+                if trackedMessages[mess] == nil then
+                    trackedMessages[mess] = {}
+                end
+                trackedMessages[mess][trigger] = trackedReaction
+            end
+        end
     end
     if count == 0 then
-	message.channel:send("I'd like to do that, but there is no one left to kick. Chill maybe")
+        message.channel:send("I'd like to do that, but there is no one left to kick. Chill maybe")
     end
     client:emit('messageFinished')
 end
 
 return {
         run = run,
+        trackedReaction = trackedReaction,
         ['trigger'] = trigger,
         ['isOn'] = true
     }
