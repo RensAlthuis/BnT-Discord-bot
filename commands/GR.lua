@@ -1,4 +1,3 @@
-client = nil
 local https = require("https")
 local xml = require('xmlSimple.lua').newParser()
 local response = ""

@@ -92,7 +92,7 @@ local function del(message)
     if mess == nil then
         print("    No message found")
     else
-        if mess.author.name == 'BooksandTea-Bot' then
+        if mess.author.name == client.user.username then
             mess.delete(mess)
         end
     end
@@ -100,7 +100,6 @@ local function del(message)
     client:emit("messageFinished")
 end
 
-client = cl
 readGRKey()
 
 local x = client:getListenerCount("BB_chunk")
@@ -115,6 +114,7 @@ math.randomseed(os.time())
 return{
 	run = run,
 	del = del,
-	['isOn'] = false
+	['isOn'] = true,
+	['trigger'] = "buttbook"
 }
 
