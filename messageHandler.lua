@@ -128,11 +128,19 @@ local function messageFinished()
 end
 
 local function reactionAdd(reaction, userId)
+    -- Call all handlers for tracked messages
     if client:getUser(userId) ~= client.user then
         if trackedMessages[reaction[1]] then
             for k, v in pairs(trackedMessages[reaction[1]]) do
                 client:emit(k, v, reaction)
             end
+        end
+    end
+
+    -- Call handlers for generic reaction handlers
+    for k, v in pairs(optionList) do
+        if v.reaction then
+            client:emit(k, v.reaction, reaction)
         end
     end
 end

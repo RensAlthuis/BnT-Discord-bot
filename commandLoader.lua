@@ -13,7 +13,7 @@ local function pcallFunctionWrapper(f, ...)
 end
 
 local function loadModule(path, ...)
-    local name= table.remove(pathjoin.splitPath('hello/hi/' .. args[1])):match('(.*).lua')
+    local name= table.remove(pathjoin.splitPath(args[1])):match('(.*).lua')
     local arg = {...}
 
     local status, res = pcall(function()
@@ -71,6 +71,7 @@ local function setupCommands(err, file)
     end
 
     print('end\n')
+
 end
 
 return {
