@@ -2,8 +2,8 @@ local Date = discordia.Date
 local trigger = "bouncer"
 
 local function hasrole(guild, user, role)
-    if user[7] then 
-        for k,v in pairs(user[7]) do
+    if user.roles then 
+        for k,v in pairs(user.roles) do
             if guild:getRole(v)[9] == role then
                 return true
             end
@@ -15,7 +15,7 @@ end
 local function trackedReaction(r)
     if r.emojiName == '✔' then
         print('Kicking user:', r.message._user.name)
-        r.message.guild:kickUser(r.message._user.id)
+        r.message._user:kick("BnT-bot did some bouncing here")
         r.message:delete()
     elseif r.emojiName == '✖'then
         r.message:delete()
@@ -28,19 +28,18 @@ local function run(message, content)
     time = tonumber(time)
     print("    checking: " .. role)
     print("    time: " .. time)
-    print(#guild.members)
     local count = 0
     for k,v in pairs(guild.members) do
         local userHasRole= hasrole(guild, v, role)
-        if v[4] ~= nil then
-            local date = Date.fromISO(v[4])
+        if v.joinedAt ~= nil then
+            local date = Date.fromISO(v.joinedAt)
             local curdate = Date.fromSeconds(os.time())
             local x = curdate - date
             if userHasRole and x:toDays() > time then
-                print('    found: ' .. v[6].name)
+                print('    found: ' .. v.name)
                 count = count + 1
-                mess = message.channel:send(v[6].name .. ", joined " .. tostring(curdate - date) .. " ago")
-                mess._user = v[6]
+                mess = message.channel:send(v.name .. ", joined " .. tostring(curdate - date) .. " ago")
+                mess._user = v
                 mess:addReaction('✖')
                 mess:addReaction('✔')
 

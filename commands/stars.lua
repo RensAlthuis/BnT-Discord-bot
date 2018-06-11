@@ -3,16 +3,17 @@ local servers = {}
 
 local function reaction(r)
     local s = servers[r.message.guild]
-    local emoji = ''
-    if r.emojiId ~= nil then
-        emoji = '<:' .. r.emojiName .. ':' .. r.emojiId .. '>'
-    else
-        emoji = r.emojiName
+    if s ~= nil then
+	    local emoji = ''
+	    if r.emojiId ~= nil then
+		emoji = '<:' .. r.emojiName .. ':' .. r.emojiId .. '>'
+	    else
+		emoji = r.emojiName
+	    end
+	    if r.count == s.count and s.emoji == emoji and r.message.channel ~= s.channel then
+		s.channel:send(r.message)
+	    end
     end
-    if r.count == s.count and s.emoji == emoji then
-        s.channel:send(r.message)
-    end
-    client:emit("messageFinished")
 end
 
 local function run(message, content)
@@ -52,7 +53,7 @@ local function run(message, content)
             message.channel:send('    invalid channel: ' .. b)
         end
     else
-        message.channel:send("stars only recognises 'channel' or 'emoji'")
+        message.channel:send("stars only recognises 'channel', 'count' or 'emoji'")
     end
     client:emit("messageFinished")
 end
