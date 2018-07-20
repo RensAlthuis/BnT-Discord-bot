@@ -14,6 +14,7 @@ local function result()
     local parsedXml = xml:ParseXmlText(response)
 
     local results = parsedXml.SearchSuggestion.Section.Item.Url:value()
+    response = ""
     return results
 end
 
