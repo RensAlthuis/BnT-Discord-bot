@@ -13,12 +13,18 @@ local function result()
 
     local parsedXml = xml:ParseXmlText(response)
 
-    local results = parsedXml.SearchSuggestion.Section.Item.Url:value()
+    local results = parsedXml.SearchSuggestion.Section
+    if results.Item ~= nil then
+        results = results.Item.Url:value()
+    else
+        results = nil
+    end
     response = ""
     return results
 end
 
 local function postMess(result, channel)
+
     if result ~= nil then
         channel:send(result)
     else
