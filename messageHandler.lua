@@ -48,11 +48,7 @@ local function funstuff(message)
         local tosearch = string.lower(message.content)
 
         for key, val in ipairs(wordlist) do
-            str = "%S*"
-            val:gsub(".", function(c)
-                str = str .. c .. "%S*"
-            end)
-            result = string.match(tosearch, str)
+            result = string.match(tosearch, val)
 
             if result ~= nil then
                 result = string.find(result, "https?://") -- exlude links
@@ -111,7 +107,9 @@ local function create(message)
         end
     end
 
-    funstuff(message)
+    if message.guild.id == '136976769721958400' then
+        funstuff(message)
+    end
 end
 
 -- When new message is created and checkmessage return true, add the call to the delete handler to the queue.
