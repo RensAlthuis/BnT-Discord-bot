@@ -24,5 +24,5 @@ end
 return {
     run = run,
     ['trigger']='reminder',
-	['isOn'] = true
+    ['isOn'] = false
 }

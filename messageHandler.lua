@@ -107,8 +107,10 @@ local function create(message)
         end
     end
 
-    if message.guild.id == '136976769721958400' then
-        funstuff(message)
+    if message.guild then
+        if message.guild.id == '136976769721958400' then
+            funstuff(message)
+        end
     end
 end
 
