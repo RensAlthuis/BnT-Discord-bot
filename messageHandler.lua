@@ -42,29 +42,6 @@ local function funstuff(message)
         end
     end
 
-    if message.channel.mentionString ~= "<#457246895392292874>" then
-        -- 457246895392292874 is the id for Dune channel
-        local wordlist = {"dune","arrakis"}
-        local tosearch = string.lower(message.content)
-
-        for key, val in ipairs(wordlist) do
-            result = string.match(tosearch, val)
-
-            if result ~= nil then
-                result = string.find(result, "https?://") -- exlude links
-                if result ~= 1 then
-                    result = 1
-                    break
-                else
-                    result = nil
-                end
-            end
-        end
-
-        if result ~= nil then
-            message:addReaction("\xF0\x9F\xA5\x83")
-        end
-    end
 end
 
 --parses a message then logs and returns the command with its content
