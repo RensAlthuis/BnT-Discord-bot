@@ -1,3 +1,4 @@
 *.key
 *log
 gateway.json
+*.exe
