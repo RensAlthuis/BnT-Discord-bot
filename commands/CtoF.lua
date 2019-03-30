@@ -3,7 +3,7 @@ local function CtoF(n)
 end
 
 local function run(message, content)
-    num = string.match(content, "(%d+)")
+    num = string.match(content, "(-?%d+)")
     if num ~= nil then 
         celcius = CtoF(num)
         message.channel:send(tostring(celcius))
@@ -49,7 +49,7 @@ local function update(message, content)
     else
         if mess.author.name == client.user.username then
             --update the message
-            num = string.match(content, "(%d+)")
+            num = string.match(content, "(-?%d+)")
             celcius = CtoF(num)
             mess:setContent(tostring(celcius))
         else

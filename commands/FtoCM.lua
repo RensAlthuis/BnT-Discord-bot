@@ -1,12 +1,13 @@
-local function FtoC(n)
-    return (n-32)*5/9
+local function FtoCM(ft, inch)
+    n = ft + (inch/12.0)
+    return n*(30.48)
 end
 
 local function run(message, content)
-    num = string.match(content, "(-?%d+)")
-    if num ~= nil then 
-        celcius = FtoC(num)
-        message.channel:send(tostring(celcius))
+    ft, inch = string.match(content, "(%d+)'(%d+)''")
+    if ft ~= nil then 
+	centi = FtoCM(ft, inch)
+	message.channel:send(tostring(centi))
     else
         message.channel:send("thats not a number >:C")
     end
@@ -49,9 +50,9 @@ local function update(message, content)
     else
         if mess.author.name == client.user.username then
             --update the message
-            num = string.match(content, "(-?%d+)")
-            celcius = FtoC(num)
-            mess:setContent(tostring(celcius))
+	    ft, inch = string.match(content, "(%d+)'(%d+)''")
+            centi = FtoCM(ft, inch)
+            mess:setContent(tostring(centi))
         else
             print('    no message found')
         end
@@ -63,7 +64,7 @@ return{
 	run = run,
 	del = del,
 	update = update,
-	['trigger'] = "FtoC",
+	['trigger'] = "FtoCM",
 	['isOn'] = true
 }
 

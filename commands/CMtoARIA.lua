@@ -1,12 +1,12 @@
-local function FtoC(n)
-    return (n-32)*5/9
+local function CMtoARIA(cm)
+    return cm/160.5
 end
 
 local function run(message, content)
-    num = string.match(content, "(-?%d+)")
-    if num ~= nil then 
-        celcius = FtoC(num)
-        message.channel:send(tostring(celcius))
+    cm = string.match(content, "(%d+)")
+    if cm ~= nil then 
+	aria = CMtoARIA(cm)
+	message.channel:send(tostring(aria))
     else
         message.channel:send("thats not a number >:C")
     end
@@ -49,9 +49,11 @@ local function update(message, content)
     else
         if mess.author.name == client.user.username then
             --update the message
-            num = string.match(content, "(-?%d+)")
-            celcius = FtoC(num)
-            mess:setContent(tostring(celcius))
+	    cm = string.match(content, "(%d+)")
+	    if cm ~= nil then
+                aria = CMtoARIA(cm)
+                mess:setContent(tostring(aria))
+	    end
         else
             print('    no message found')
         end
@@ -63,7 +65,7 @@ return{
 	run = run,
 	del = del,
 	update = update,
-	['trigger'] = "FtoC",
+	['trigger'] = "CMtoAria",
 	['isOn'] = true
 }
 
