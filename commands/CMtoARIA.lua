@@ -1,5 +1,5 @@
 local function CMtoARIA(cm)
-    return cm/160.5
+    return cm/160.545849385802850
 end
 
 local function run(message, content)

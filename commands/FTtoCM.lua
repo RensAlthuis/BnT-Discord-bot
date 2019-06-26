@@ -64,7 +64,7 @@ return{
 	run = run,
 	del = del,
 	update = update,
-	['trigger'] = "FtoCM",
+	['trigger'] = "FTtoCM",
 	['isOn'] = true
 }
 

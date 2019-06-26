@@ -68,7 +68,7 @@ return{
 	run = run,
 	del = del,
 	update = update,
-	['trigger'] = "CMtoF",
+	['trigger'] = "CMtoFT",
 	['isOn'] = true
 }
 
