@@ -1,41 +1,17 @@
-local commandLoader = require('./commandLoader.lua')
-local funcList ={}
-
-funcList['triggers'] = function(content)
-    for k, v in pairs(optionList) do
-        print(k)
-    end
-end
-
-funcList['loadCommand'] = function(content)
-   commandLoader.loadCommand(content)
-   print("end\n")
-end
-funcList['l'] = funcList['loadCommand']
+local fs = require('fs')
+local moduleLoader = require('../util/moduleLoader.lua')
+local modules = {}
 
 
-funcList['exec'] = function(content)
-    if #content  == 0 then
-        for k,v in pairs(optionList) do
-            print(k,v)
-        end
-    else
-        if optionList[content] then
-            if optionList[content].run then
-                status, res = pcall(optionList[content].run)
-                if not status then
-                    print(res)
-                end
-            end
-        end
-    end
-end
-
-local function userInputHandler(...)
+local function onInput(...)
     local option, content = string.match(..., "(%g*)%s?(.*)\n", 1)
-    if funcList[option] then
-        funcList[option](content)
+    if modules[option] then
+        modules[option](content)
     end
 end
 
-return {userInputHandler = userInputHandler}
+fs.readdir('./ui_commands', function (files)
+    modules = moduleLoader.loadFolder(files, {})
+end)
+
+return {onInput = onInput}

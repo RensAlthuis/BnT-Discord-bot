@@ -1,48 +1,42 @@
-_G.discordia = require('discordia')
-_G.client = discordia.Client {
-    cacheAllMembers = true
-}
-
 local fs = require('fs')
 
-local commandLoader = require("./commandLoader.lua")
-local ui = require('./userInputHandler.lua')
+-- loading discordia
+-- temporarily overwrite stdout so discordia won't flood it with messages
+-- alternative is setting logLevel to 0 but I do really want to save those messages somewhere
+local stdout = process.stdout.handle
+process.stdout.handle = fs.createWriteStream('/dev/null', {flags = 'a'})
+_G.discordia = require('discordia')
+_G.client = discordia.Client { cacheAllMembers = true, }
+_G.log = require('./util/log.lua')
+process.stdout.handle = stdout
 
 local keyfile = args[2]
 
-local function tprint(t)
-    if t then
-        for k,v in pairs(t) do
-            print(k,v)
-        end
-        print('\n\n')
-    else
-        print('nil')
-    end
-end
+local ui = require('./userInputHandler.lua')
+local commandLoader = require("./commandLoader.lua")
 
 -- start bot using key read from the file
-local function startBot(err, file)
+local function startBot(err, key)
 
-    print('starting bot')
-    local mH = require('messageHandler').init(commandLoader.optionList)
-    _G.trackedMessages = mH.trackedMessages
+    log.print('starting bot')
 
-    if err ~= nil then
-        print(err)
-        return
-    end
+    --local mH = require('messageHandler').init(commandLoader.optionList)
+    --_G.trackedMessages = mH.trackedMessages
+--
+    --if err ~= nil then
+        --print(err)
+        --return
+    --end
 
-    client:run('Bot ' .. file)
+    -- client:run('Bot ' .. key)
 end
 
-client:on('ready', function()
-    print('\n')
-    fs.readdir('./commands', commandLoader.setupCommands)
-    client:setUsername("BooksAndTea-Bot")
-    print('Logged in as ' .. client.user.username .. '\n')
-end)
+--client:on('ready', function()
+    --print('loading commands')
+    --fs.readdir('./commands', commandLoader.setupCommands)
+    --client:setUsername("BooksAndTea-Bot")
+    --print('Bot ready, Logged in as ' .. client.user.username .. '\n')
+--end)
 
 fs.readFile(keyfile, startBot)
-process.stdin:on("data", ui.userInputHandler)
-
+process.stdin:on("data", ui.onInput)
