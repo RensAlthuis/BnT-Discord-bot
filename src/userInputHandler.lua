@@ -1,5 +1,5 @@
 local fs = require('fs')
-local moduleLoader = require('../util/moduleLoader.lua')
+local moduleLoader = require('./util/moduleLoader.lua')
 local modules = {}
 
 local function onInput(...)
@@ -9,8 +9,6 @@ local function onInput(...)
     end
 end
 
-fs.readdir('./ui_commands', function (files)
-    modules = moduleLoader.loadFolder(files, {})
-end)
+modules = moduleLoader.loadFolder("src/ui_commands", {})
 
 return {onInput = onInput}

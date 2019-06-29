@@ -1,25 +1,36 @@
-local log = require("log")
+local fs = require('fs')
 
 local function loadModule(path, env)
     local chunk, err = loadfile(path, 'bt', env)
     if chunk == nil then
-        log.print(0, "[ERR} couldn't load module", path)
-        log.print(1, "error message:", err)
+        log.err(0, "couldn't load module:", path)
+        log.print(2, "error message:", err)
         return nil
     end
-    chunk()
+    local status, err = pcall(chunk)
+    if status == false then
+        log.err(0, "couldn't execute module:", path)
+        log.print(2, "error message:", err)
+        return nil
+    end
     return env
 end
 
 --Search commands folder for .lua files and load them into optionList
 local function loadFolder(path, env)
-    if err ~= nil then
-        print(err)
-        return
+    if fs.existsSync(path) == false then
+        log.err(0, "non exitent path: " .. path)
+        return {}
     end
+
+    local files = fs.readdirSync(path)
+    if err ~= nil then
+        log.err(0, err)
+    end
+
     local modules = {}
-    for k,v in pairs(file) do
-        local mod = loadModule(path .. '/' .. file, env)
+    for k,v in pairs(files) do
+        local mod = loadModule(path .. '/' .. v, env)
         if mod ~= nil then
             modules[v] = mod
         end

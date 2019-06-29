@@ -1,4 +1,5 @@
 local fs = require('fs')
+local keyfile = args[2]
 
 --[[
 Loading discordia framework
@@ -10,32 +11,38 @@ local stdout = process.stdout.handle
 process.stdout.handle = fs.createWriteStream('/dev/null', {flags = 'a'})
 _G.discordia = require('discordia')
 _G.client = discordia.Client { cacheAllMembers = true, }
-_G.log = require('./util/log.lua')
+_G.log = require('./util/log.lua')("main.log")
 process.stdout.handle = stdout
-
-
-local keyfile = args[2]
-local ui = require('./userInputHandler.lua')
 
 --[[
 start bot using key read from the file
 ]]
 local function startBot(err, key)
-    log.print('starting bot')
+
+    log.print(0, "")
+    log.print(0, "")
+    log.print(0, "")
+    log.print(0, "")
+    log.info(0, "BOOTING...")
+
+    log.info(0, "Setting up TUI")
+    local ui = require('./userInputHandler.lua')
+    process.stdin:on("data", ui.onInput)
+
+    log.info(0,'Starting Discordia client')
     client:run('Bot ' .. key)
 end
 
 client:on('ready', function()
-    log.print(0, 'Bot Ready')
+    log.info(0, 'Client Ready')
     client:setUsername("BooksAndTea-Bot")
-    print(0, 'Logged in as ' .. client.user.username .. '\n')
+    print(2, 'Logged in as: ' .. client.user.username .. '\n')
 
     -- print('loading commands')
     --fs.readdir('./commands', commandLoader.setupCommands)
 end)
 
 fs.readFile(keyfile, startBot)
-process.stdin:on("data", ui.onInput)
 
 -- local commandLoader = require("./commandLoader.lua")
 --local mH = require('messageHandler').init(commandLoader.optionList)
