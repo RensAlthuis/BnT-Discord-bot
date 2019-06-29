@@ -1,4 +1,4 @@
 #!/bin/bash
 
 killall luvit
-luvit bot.lua bnt.key &>> log &
+luvit src/bot.lua bnt.key &>> log &
