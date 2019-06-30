@@ -5,7 +5,7 @@ local logfile = io.open(path, "a+")
 
 p = print
 local function print(indent, ...)
-    assert(type(indent) == "number", "tprint expects a number as first argument")
+    assert(type(indent) == "number", "print expects a number as first argument")
 
     local date = os.date("| %c | ")
     io.write(date)
@@ -33,11 +33,13 @@ end
 
 local function tprint(indent, table)
     assert(type(indent) == "number", "tprint expects a number as first argument")
+    assert(type(table) == "table", "tprint expects a table as second argument")
+
     for k,v in pairs(table) do
         for x=0, indent do
             io.write('  ')
         end
-        print(k,v)
+        p(k,v)
     end
 end
 

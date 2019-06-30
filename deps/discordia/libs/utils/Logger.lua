@@ -1,3 +1,14 @@
+--[=[
+@ic Logger
+@p level number
+@p dateTime string
+@op file string
+@d Used to log formatted messages to stdout (the console) or to a file.
+The `dateTime` argument should be a format string that is accepted by `os.date`.
+The file argument should be a relative or absolute file path or `nil` if no log
+file is desired. See the `logLevel` enumeration for acceptable log level values.
+]=]
+
 local fs = require('fs')
 
 local date = os.date
@@ -36,6 +47,17 @@ function Logger:__init(level, dateTime, file)
 	self._file = file and openSync(file, 'a')
 end
 
+--[=[
+@m log
+@p level number
+@p msg string
+@p ... *
+@r string
+@d If the provided level is less than or equal to the log level set on
+initialization, this logs a message to stdout as defined by Luvit's `process`
+module and to a file if one was provided on initialization. The `msg, ...` pair
+is formatted according to `string.format` and returned if the message is logged.
+]=]
 function Logger:log(level, msg, ...)
 
 	if self._level < level then return end

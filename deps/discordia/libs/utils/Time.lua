@@ -1,3 +1,9 @@
+--[=[
+@ic Time
+@d Represents a length of time and provides utilities for converting to and from
+different formats with millisecond precision.
+]=]
+
 local class = require('class')
 local constants = require('constants')
 
@@ -38,11 +44,24 @@ function Time:__init(value)
 end
 
 local function addString(unit, tbl, ret)
-	if tbl[unit] == 0 then return end
-	return insert(ret, tbl[unit] .. ' ' .. unit)
+	if tbl[unit] == 1 then
+		insert(ret, tbl[unit] .. ' ' .. unit:sub(1, #unit - 1))
+	elseif tbl[unit] > 0 then
+		insert(ret, tbl[unit] .. ' ' .. unit)
+	end
 end
 
 function Time:__tostring()
+	return 'Time: ' .. self:toString()
+end
+
+--[=[
+@m toString
+@r string
+@d Returns a string from the normalized time values that can be used to
+represent the time object in a string form.
+]=]
+function Time:toString()
 	local tbl = self:toTable()
 	local ret = {}
 	addString('weeks', tbl, ret)
@@ -51,7 +70,7 @@ function Time:__tostring()
 	addString('minutes', tbl, ret)
 	addString('seconds', tbl, ret)
 	addString('milliseconds', tbl, ret)
-	return 'Time: ' .. concat(ret, ', ')
+	return #ret > 0 and concat(ret, ', ') or '0 milliseconds'
 end
 
 function Time:__eq(other) check(self, other)
@@ -98,30 +117,79 @@ function Time:__div(other)
 	end
 end
 
+--[=[
+@sm fromWeeks
+@p t number
+@r Time
+@d Constructs a new Time object from a value interpreted as weeks, where a week
+is equal to 7 days.
+]=]
 function Time.fromWeeks(t)
 	return Time(t * MS_PER_WEEK)
 end
 
+--[=[
+@sm fromDays
+@p t number
+@r Time
+@d Constructs a new Time object from a value interpreted as days, where a day is
+equal to 24 hours.
+]=]
 function Time.fromDays(t)
 	return Time(t * MS_PER_DAY)
 end
 
+--[=[
+@sm fromHours
+@p t number
+@r Time
+@d Constructs a new Time object from a value interpreted as hours, where an hour is
+equal to 60 minutes.
+]=]
 function Time.fromHours(t)
 	return Time(t * MS_PER_HOUR)
 end
 
+--[=[
+@sm fromMinutes
+@p t number
+@r Time
+@d Constructs a new Time object from a value interpreted as minutes, where a minute
+is equal to 60 seconds.
+]=]
 function Time.fromMinutes(t)
 	return Time(t * MS_PER_MIN)
 end
 
+--[=[
+@sm fromSeconds
+@p t number
+@r Time
+@d Constructs a new Time object from a value interpreted as seconds, where a second
+is equal to 1000 milliseconds.
+]=]
 function Time.fromSeconds(t)
 	return Time(t * MS_PER_S)
 end
 
+--[=[
+@sm fromMilliseconds
+@p t number
+@r Time
+@d Constructs a new Time object from a value interpreted as milliseconds, the base
+unit represented.
+]=]
 function Time.fromMilliseconds(t)
 	return Time(t)
 end
 
+--[=[
+@sm fromTable
+@p t table
+@r Time
+@d Constructs a new Time object from a table of time values where the keys are
+defined in the constructors above (eg: `weeks`, `days`, `hours`).
+]=]
 function Time.fromTable(t)
 	local n = 0
 	for k, v in pairs(from) do
@@ -133,30 +201,66 @@ function Time.fromTable(t)
 	return Time(n)
 end
 
+--[=[
+@m toWeeks
+@r number
+@d Returns the total number of weeks that the time object represents.
+]=]
 function Time:toWeeks()
 	return self:toMilliseconds() / MS_PER_WEEK
 end
 
+--[=[
+@m toDays
+@r number
+@d Returns the total number of days that the time object represents.
+]=]
 function Time:toDays()
 	return self:toMilliseconds() / MS_PER_DAY
 end
 
+--[=[
+@m toHours
+@r number
+@d Returns the total number of hours that the time object represents.
+]=]
 function Time:toHours()
 	return self:toMilliseconds() / MS_PER_HOUR
 end
 
+--[=[
+@m toMinutes
+@r number
+@d Returns the total number of minutes that the time object represents.
+]=]
 function Time:toMinutes()
 	return self:toMilliseconds() / MS_PER_MIN
 end
 
+--[=[
+@m toSeconds
+@r number
+@d Returns the total number of seconds that the time object represents.
+]=]
 function Time:toSeconds()
 	return self:toMilliseconds() / MS_PER_S
 end
 
+--[=[
+@m toMilliseconds
+@r number
+@d Returns the total number of milliseconds that the time object represents.
+]=]
 function Time:toMilliseconds()
 	return self._value
 end
 
+--[=[
+@m toTable
+@r number
+@d Returns a table of normalized time values that can be used to represent the
+time object in a more human-readable form.
+]=]
 function Time:toTable()
 	local v = self._value
 	return {

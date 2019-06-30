@@ -1,3 +1,14 @@
+--[=[
+@ic Client x Emitter
+@op options table
+@d The main point of entry into a Discordia application. All data relevant to
+Discord is accessible through a client instance or its child objects after a
+connection to Discord is established with the `run` method. In other words,
+client data should not be expected and most client methods should not be called
+until after the `ready` event is received. Base emitter methods may be called
+at any time. See [[client options]].
+]=]
+
 local fs = require('fs')
 local json = require('json')
 
@@ -18,9 +29,12 @@ local Webhook = require('containers/Webhook')
 local Relationship = require('containers/Relationship')
 
 local Cache = require('iterables/Cache')
+local WeakCache = require('iterables/WeakCache')
 local Emitter = require('utils/Emitter')
 local Logger = require('utils/Logger')
 local Mutex = require('utils/Mutex')
+
+local VoiceManager = require('voice/VoiceManager')
 
 local encode, decode, null = json.encode, json.decode, json.null
 local readFileSync, writeFileSync = fs.readFileSync, fs.writeFileSync
@@ -33,9 +47,10 @@ local time, difftime = os.time, os.difftime
 local format = string.format
 
 local CACHE_AGE = constants.CACHE_AGE
+local GATEWAY_VERSION = constants.GATEWAY_VERSION
 
 -- do not change these options here
--- pass a custom table on client construction instead
+-- pass a custom table on client initialization instead
 local defaultOptions = {
 	routeDelay = 300,
 	maxRetries = 5,
@@ -94,17 +109,33 @@ function Client:__init(options)
 	self._group_channels = Cache({}, GroupChannel, self)
 	self._private_channels = Cache({}, PrivateChannel, self)
 	self._relationships = Cache({}, Relationship, self)
+	self._webhooks = WeakCache({}, Webhook, self) -- used for audit logs
 	self._logger = Logger(options.logLevel, options.dateTime, options.logFile)
+	self._voice = VoiceManager(self)
+	self._role_map = {}
+	self._emoji_map = {}
 	self._channel_map = {}
+	self._events = require('client/EventHandler')
 end
 
 for name, level in pairs(logLevel) do
 	Client[name] = function(self, fmt, ...)
 		local msg = self._logger:log(level, fmt, ...)
-		if #self._listeners[name] > 0 then
-			return self:emit(name, msg or format(fmt, ...))
-		end
+		return self:emit(name, msg or format(fmt, ...))
 	end
+end
+
+function Client:_deprecated(clsName, before, after)
+	local info = debug.getinfo(3)
+	return self:warning(
+		'%s:%s: %s.%s is deprecated; use %s.%s instead',
+		info.short_src,
+		info.currentline,
+		clsName,
+		before,
+		clsName,
+		after
+	)
 end
 
 local function run(self, token)
@@ -121,6 +152,7 @@ local function run(self, token)
 		return self:error('Could not authenticate, check token: ' .. err1)
 	end
 	self._user = users:_insert(user)
+	self._token = token
 
 	self:info('Authenticated as %s#%s', user.username, user.discriminator)
 
@@ -217,23 +249,45 @@ local function run(self, token)
 		self:info('Launching shards %i through %i (%i out of %i)...', first, last, d, count)
 	end
 
-	self._shard_count = count
+	self._total_shard_count = count
+	self._shard_count = d
+
 	for id = first, last do
 		self._shards[id] = Shard(id, self)
 	end
 
+	local path = format('/?v=%i&encoding=json', GATEWAY_VERSION)
 	for _, shard in pairs(self._shards) do
-		wrap(shard.connect)(shard, url, token)
+		wrap(shard.connect)(shard, url, path)
 		shard:identifyWait()
 	end
 
 end
 
+--[=[
+@m run
+@p token string
+@op presence table
+@r nil
+@d Authenticates the current user via HTTPS and launches as many WSS gateway
+shards as are required or requested. By using coroutines that are automatically
+managed by Luvit libraries and a libuv event loop, multiple clients per process
+and multiple shards per client can operate concurrently. This should be the last
+method called after all other code and event handlers have been initialized. If
+a presence table is provided, it will act as if the user called `setStatus`
+and `setGame` after `run`.
+]=]
 function Client:run(token, presence)
 	self._presence = presence or {}
 	return wrap(run)(self, token)
 end
 
+--[=[
+@m stop
+@r nil
+@d Disconnects all shards and effectively stop their loops. This does not
+empty any data that the client may have cached.
+]=]
 function Client:stop()
 	for _, shard in pairs(self._shards) do
 		shard:disconnect()
@@ -251,15 +305,38 @@ function Client:_modify(payload)
 	end
 end
 
+--[=[
+@m setUsername
+@p username string
+@r boolean
+@d Sets the client's username. This must be between 2 and 32 characters in
+length. This does not change the application name.
+]=]
 function Client:setUsername(username)
 	return self:_modify({username = username or null})
 end
 
+--[=[
+@m setAvatar
+@p avatar Base64-Resolveable
+@r boolean
+@d Sets the client's avatar. To remove the avatar, pass an empty string or nil.
+This does not change the application image.
+]=]
 function Client:setAvatar(avatar)
 	avatar = avatar and Resolver.base64(avatar)
 	return self:_modify({avatar = avatar or null})
 end
 
+--[=[
+@m createGuild
+@p name string
+@r boolean
+@d Creates a new guild. The name must be between 2 and 100 characters in length.
+This method may not work if the current user is in too many guilds. Note that
+this does not return the created guild object; wait for the corresponding
+`guildCreate` event if you need the object.
+]=]
 function Client:createGuild(name)
 	local data, err = self._api:createGuild({name = name})
 	if data then
@@ -269,6 +346,11 @@ function Client:createGuild(name)
 	end
 end
 
+--[=[
+@m createGroupChannel
+@r GroupChannel
+@d Creates a new group channel. This method is only available for user accounts.
+]=]
 function Client:createGroupChannel()
 	local data, err = self._api:createGroupDM()
 	if data then
@@ -278,6 +360,13 @@ function Client:createGroupChannel()
 	end
 end
 
+--[=[
+@m getWebhook
+@p id string
+@r Webhook
+@d Gets a webhook object by ID. This always makes an HTTP request to obtain a
+static object that is not cached and is not updated by gateway events.
+]=]
 function Client:getWebhook(id)
 	local data, err = self._api:getWebhook(id)
 	if data then
@@ -287,8 +376,16 @@ function Client:getWebhook(id)
 	end
 end
 
-function Client:getInvite(code)
-	local data, err = self._api:getInvite(code)
+--[=[
+@m getInvite
+@p code string
+@op counts boolean
+@r Invite
+@d Gets an invite object by code. This always makes an HTTP request to obtain a
+static object that is not cached and is not updated by gateway events.
+]=]
+function Client:getInvite(code, counts)
+	local data, err = self._api:getInvite(code, counts and {with_counts = true})
 	if data then
 		return Invite(data, self)
 	else
@@ -296,6 +393,15 @@ function Client:getInvite(code)
 	end
 end
 
+--[=[
+@m getUser
+@p id User-ID-Resolvable
+@r User
+@d Gets a user object by ID. If the object is already cached, then the cached
+object will be returned; otherwise, an HTTP request is made. Under circumstances
+which should be rare, the user object may be an old version, not updated by
+gateway events.
+]=]
 function Client:getUser(id)
 	id = Resolver.userId(id)
 	local user = self._users:get(id)
@@ -311,11 +417,30 @@ function Client:getUser(id)
 	end
 end
 
+--[=[
+@m getGuild
+@p id Guild-ID-Resolvable
+@r Guild
+@d Gets a guild object by ID. The current user must be in the guild and the client
+must be running the appropriate shard that serves this guild. This method never
+makes an HTTP request to obtain a guild.
+]=]
 function Client:getGuild(id)
 	id = Resolver.guildId(id)
 	return self._guilds:get(id)
 end
 
+--[=[
+@m getChannel
+@p id Channel-ID-Resolvable
+@r Channel
+@d Gets a channel object by ID. For guild channels, the current user must be in
+the channel's guild and the client must be running the appropriate shard that
+serves the channel's guild.
+
+For private channels, the channel must have been previously opened and cached.
+If the channel is not cached, `User:getPrivateChannel` should be used instead.
+]=]
 function Client:getChannel(id)
 	id = Resolver.channelId(id)
 	local guild = self._channel_map[id]
@@ -326,26 +451,81 @@ function Client:getChannel(id)
 	end
 end
 
+--[=[
+@m getRole
+@p id Role-ID-Resolvable
+@r Role
+@d Gets a role object by ID. The current user must be in the role's guild and
+the client must be running the appropriate shard that serves the role's guild.
+]=]
+function Client:getRole(id)
+	id = Resolver.roleId(id)
+	local guild = self._role_map[id]
+	return guild and guild._roles:get(id)
+end
+
+--[=[
+@m getEmoji
+@p id Emoji-ID-Resolvable
+@r Emoji
+@d Gets an emoji object by ID. The current user must be in the emoji's guild and
+the client must be running the appropriate shard that serves the emoji's guild.
+]=]
+function Client:getEmoji(id)
+	id = Resolver.emojiId(id)
+	local guild = self._emoji_map[id]
+	return guild and guild._emojis:get(id)
+end
+
+--[=[
+@m listVoiceRegions
+@r table
+@d Returns a raw data table that contains a list of voice regions as provided by
+Discord, with no formatting beyond what is provided by the Discord API.
+]=]
 function Client:listVoiceRegions()
 	return self._api:listVoiceRegions()
 end
 
+--[=[
+@m getConnections
+@r table
+@d Returns a raw data table that contains a list of connections as provided by
+Discord, with no formatting beyond what is provided by the Discord API.
+This is unrelated to voice connections.
+]=]
 function Client:getConnections()
 	return self._api:getUsersConnections()
 end
 
+--[=[
+@m getApplicationInformation
+@r table
+@d Returns a raw data table that contains information about the current OAuth2
+application, with no formatting beyond what is provided by the Discord API.
+]=]
+function Client:getApplicationInformation()
+	return self._api:getCurrentApplicationInformation()
+end
+
 local function updateStatus(self)
-	local shards = self._shards
 	local presence = self._presence
 	presence.afk = presence.afk or null
 	presence.game = presence.game or null
 	presence.since = presence.since or null
 	presence.status = presence.status or null
-	for i = 0, self._shard_count - 1 do
-		shards[i]:updateStatus(presence)
+	for _, shard in pairs(self._shards) do
+		shard:updateStatus(presence)
 	end
 end
 
+--[=[
+@m setStatus
+@p status string
+@r nil
+@d Sets the current users's status on all shards that are managed by this client.
+See the `status` enumeration for acceptable status values.
+]=]
 function Client:setStatus(status)
 	if type(status) == 'string' then
 		self._presence.status = status
@@ -361,15 +541,26 @@ function Client:setStatus(status)
 	return updateStatus(self)
 end
 
+--[=[
+@m setGame
+@p game string/table
+@r nil
+@d Sets the current users's game on all shards that are managed by this client.
+If a string is passed, it is treated as the game name. If a table is passed, it
+must have a `name` field and may optionally have a `url` or `type` field. Pass `nil` to
+remove the game status.
+]=]
 function Client:setGame(game)
 	if type(game) == 'string' then
 		game = {name = game, type = gameType.default}
 	elseif type(game) == 'table' then
 		if type(game.name) == 'string' then
-			if type(game.url) == 'string' then
-				game.type = gameType.streaming
-			else
-				game.type = gameType.default
+			if type(game.type) ~= 'number' then
+				if type(game.url) == 'string' then
+					game.type = gameType.streaming
+				else
+					game.type = gameType.default
+				end
 			end
 		else
 			game = null
@@ -381,6 +572,13 @@ function Client:setGame(game)
 	return updateStatus(self)
 end
 
+--[=[
+@m setAFK
+@p afk boolean
+@r nil
+@d Set the current user's AFK status on all shards that are managed by this client.
+This generally applies to user accounts and their push notifications.
+]=]
 function Client:setAFK(afk)
 	if type(afk) == 'boolean' then
 		self._presence.afk = afk
@@ -390,46 +588,70 @@ function Client:setAFK(afk)
 	return updateStatus(self)
 end
 
+--[=[@p shardCount number/nil The number of shards that this client is managing.]=]
 function get.shardCount(self)
 	return self._shard_count
 end
 
+--[=[@p totalShardCount number/nil The total number of shards that the current user is on.]=]
+function get.totalShardCount(self)
+	return self._total_shard_count
+end
+
+--[=[@p user User/nil User object representing the current user.]=]
 function get.user(self)
 	return self._user
 end
 
+--[=[@p owner User/nil User object representing the current user's owner.]=]
 function get.owner(self)
 	return self._owner
 end
 
+--[=[@p verified boolean/nil Whether the current user's owner's account is verified.]=]
 function get.verified(self)
 	return self._user and self._user._verified
 end
 
+--[=[@p mfaEnabled boolean/nil Whether the current user's owner's account has multi-factor (or two-factor)
+authentication enabled. This is equivalent to `verified`]=]
 function get.mfaEnabled(self)
 	return self._user and self._user._verified
 end
 
+--[=[@p email string/nil The current user's owner's account's email address (user-accounts only).]=]
 function get.email(self)
 	return self._user and self._user._email
 end
 
+--[=[@p guilds Cache An iterable cache of all guilds that are visible to the client. Note that the
+guilds present here correspond to which shards the client is managing. If all
+shards are managed by one client, then all guilds will be present.]=]
 function get.guilds(self)
 	return self._guilds
 end
 
+--[=[@p users Cache An iterable cache of all users that are visible to the client.
+To access a user that may exist but is not cached, use `Client:getUser`.]=]
 function get.users(self)
 	return self._users
 end
 
+--[=[@p privateChannels Cache An iterable cache of all private channels that are visible to the client. The
+channel must exist and must be open for it to be cached here. To access a
+private channel that may exist but is not cached, `User:getPrivateChannel`.]=]
 function get.privateChannels(self)
 	return self._private_channels
 end
 
+--[=[@p groupChannels Cache An iterable cache of all group channels that are visible to the client. Only
+user-accounts should have these.]=]
 function get.groupChannels(self)
 	return self._group_channels
 end
 
+--[=[@p relationships Cache An iterable cache of all relationships that are visible to the client. Only
+user-accounts should have these.]=]
 function get.relationships(self)
 	return self._relationships
 end

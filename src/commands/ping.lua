@@ -1,10 +1,11 @@
-local function run(message, content)
-
-    print("    reply: pong")
-    client:emit('messageFinished')
+local function handler(option, content, message)
+    message.channel:send("pong")
 end
 
-return {
-    run = run,
-    ['isOn'] = false
-}
+function start()
+    emitter:on("create_ping", handler)
+end
+
+function stop()
+    emitter:removeListener("create_ping", handler)
+end

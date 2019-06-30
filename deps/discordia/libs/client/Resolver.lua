@@ -1,9 +1,11 @@
 local fs = require('fs')
+local ffi = require('ffi')
 local ssl = require('openssl')
 local class = require('class')
 local enums = require('enums')
 
 local permission = enums.permission
+local actionType = enums.actionType
 local base64 = ssl.base64
 local readFileSync = fs.readFileSync
 local classes = class.classes
@@ -14,20 +16,15 @@ local format = string.format
 
 local Resolver = {}
 
-local int64_t, uint64_t, istype
-local function loadffi()
-	local ffi = require('ffi')
-	istype = ffi.istype
-	int64_t = ffi.typeof('int64_t')
-	uint64_t = ffi.typeof('uint64_t')
-end
+local istype = ffi.istype
+local int64_t = ffi.typeof('int64_t')
+local uint64_t = ffi.typeof('uint64_t')
 
 local function int(obj)
 	local t = type(obj)
 	if t == 'string' and tonumber(obj) then
 		return obj
 	elseif t == 'cdata' then
-		if not istype then loadffi() end
 		if istype(int64_t, obj) or istype(uint64_t, obj) then
 			return tostring(obj):match('%d*')
 		end
@@ -74,8 +71,24 @@ function Resolver.roleId(obj)
 	return int(obj)
 end
 
+function Resolver.emojiId(obj)
+	if isInstance(obj, classes.Emoji) then
+		return obj.id
+	elseif isInstance(obj, classes.Reaction) then
+		return obj.emojiId
+	end
+	return int(obj)
+end
+
 function Resolver.guildId(obj)
 	if isInstance(obj, classes.Guild) then
+		return obj.id
+	end
+	return int(obj)
+end
+
+function Resolver.entryId(obj)
+	if isInstance(obj, classes.AuditLogEntry) then
 		return obj.id
 	end
 	return int(obj)
@@ -90,6 +103,20 @@ function Resolver.messageIds(objs)
 	elseif type(objs) == 'table' then
 		for _, obj in pairs(objs) do
 			insert(ret, Resolver.messageId(obj))
+		end
+	end
+	return ret
+end
+
+function Resolver.roleIds(objs)
+	local ret = {}
+	if isInstance(objs, classes.Iterable) then
+		for obj in objs:iter() do
+			insert(ret, Resolver.roleId(obj))
+		end
+	elseif type(objs) == 'table' then
+		for _, obj in pairs(objs) do
+			insert(ret, Resolver.roleId(obj))
 		end
 	end
 	return ret
@@ -125,6 +152,17 @@ function Resolver.permission(obj)
 		n = permission[obj]
 	elseif t == 'number' then
 		n = permission(obj) and obj
+	end
+	return n
+end
+
+function Resolver.actionType(obj)
+	local t = type(obj)
+	local n = nil
+	if t == 'string' then
+		n = actionType[obj]
+	elseif t == 'number' then
+		n = actionType(obj) and obj
 	end
 	return n
 end

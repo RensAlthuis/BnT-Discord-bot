@@ -18,7 +18,7 @@ limitations under the License.
 
 --[[lit-meta
   name = "luvit/http-codec"
-  version = "3.0.2"
+  version = "3.0.4"
   homepage = "https://github.com/luvit/luvit/blob/master/deps/http-codec.lua"
   description = "A simple pair of functions for converting between hex and raw strings."
   tags = {"codec", "http"}
@@ -204,7 +204,7 @@ local function decoder()
     -- Parse the header lines
     while true do
       local key, value
-      _, offset, key, value = find(chunk, "^([^:\r\n]+): *([^\r\n]+)\r?\n", offset + 1)
+      _, offset, key, value = find(chunk, "^([^:\r\n]+): *([^\r\n]*)\r?\n", offset + 1)
       if not offset then break end
       local lowerKey = lower(key)
 
@@ -249,7 +249,12 @@ local function decoder()
     local len, term
     len, term = match(chunk, "^(%x+)(..)", index)
     if not len then return end
-    assert(term == "\r\n")
+    if term ~= "\r\n" then
+      -- Wait for full chunk-size\r\n header
+      if #chunk < 18 then return end
+      -- But protect against evil clients by refusing chunk-sizes longer than 16 hex digits.
+      error("chunk-size field too large")
+    end
     index = index + #len + 2
     local offset = index - 1
     local length = tonumber(len, 16)

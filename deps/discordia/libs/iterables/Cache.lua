@@ -1,3 +1,8 @@
+--[=[
+@c Cache x Iterable
+@d Iterable class that holds references to Discordia Class objects in no particular order.
+]=]
+
 local json = require('json')
 local Iterable = require('iterables/Iterable')
 
@@ -38,10 +43,8 @@ local function remove(self, k, obj)
 end
 
 local function hash(data)
-	local meta = getmetatable(data)
-	if not meta or meta.__jsontype ~= 'object' then
-		return nil, 'data must be a json object'
-	end
+	-- local meta = getmetatable(data) -- debug
+	-- assert(meta and meta.__jsontype == 'object') -- debug
 	if data.id then -- snowflakes
 		return data.id
 	elseif data.user then -- members
@@ -107,10 +110,24 @@ function Cache:_load(array, update)
 	end
 end
 
+--[=[
+@m get
+@p k *
+@r *
+@d Returns an individual object by key, where the key should match the result of
+calling `__hash` on the contained objects. Unlike Iterable:get, this
+method operates with O(1) complexity.
+]=]
 function Cache:get(k)
 	return self._objects[k]
 end
 
+--[=[
+@m iter
+@r function
+@d Returns an iterator that returns all contained objects. The order of the objects
+is not guaranteed.
+]=]
 function Cache:iter()
 	local objects, k, obj = self._objects
 	return function()
