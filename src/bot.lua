@@ -50,6 +50,8 @@ client:on('ready', function()
     }
     commandLoader.start(settings)
     log.print(2, 'Done')
+
+    commandLoader.loadCommand("src/commands/ping.lua")
 end)
 
 fs.readFile(keyfile, startBot)

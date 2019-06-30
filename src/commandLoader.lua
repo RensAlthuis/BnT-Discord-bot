@@ -25,26 +25,30 @@ local function start(settings)
 end
 
 local function loadCommand(path)
+    local filename = pathLib.basename(path, "")
+    log.info(0, "Loading command module:", filename)
+
     local env = {
         log = log,
         emitter = _settings.emitter
     }
 
-    local mod = moduleLoader.loadModule(path, env)
+    local mod = moduleLoader.load(path, env)
     if mod == nil then
         return false
     end
 
-    local filename = pathLib.basename(path, "")
     if modules[filename] then
-        log.info(0, "stopping command module:", filename)
+        log.print(3, "Module already loaded..")
+        log.print(3, "stopping old command module")
         modules[filename].stop()
     end
 
-    log.info(0, "loading command module:", filename)
+    log.print(3, "starting new command module")
     mod.start()
     modules[filename] = mod
 
+    log.print(2, "End")
     return true
 end
 

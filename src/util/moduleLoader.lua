@@ -1,6 +1,6 @@
 local fs = require('fs')
 
-local function loadModule(path, env)
+local function load(path, env)
     local chunk, err = loadfile(path, 'bt', env)
     if chunk == nil then
         log.err(0, "couldn't load module:", path)
@@ -30,7 +30,7 @@ local function loadFolder(path, env)
 
     local modules = {}
     for k,v in pairs(files) do
-        local mod = loadModule(path .. '/' .. v, env)
+        local mod = load(path .. '/' .. v, env)
         if mod ~= nil then
             modules[v] = mod
         end
