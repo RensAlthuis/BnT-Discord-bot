@@ -1,13 +1,16 @@
 local fs = require('fs')
+
+--TODO: keyfile should load from json settings file
 local keyfile = args[2]
+
 local messageHandler = require('./messageHandler.lua')
 local commandLoader = require('./commandLoader.lua')
 
 --[[
-Loading discordia framework
-temporarily overwrites stdout so discordia won't flood it with messages
-alternative is setting logLevel to 0 but that would prevent the logfile from being created aswell
-and I do want to save those messages somewhere
+    Loading discordia framework
+    temporarily overwrites stdout so discordia won't flood it with messages
+    alternative is setting logLevel to 0 but that would prevent the logfile from being created aswell
+    and I do want to save those messages somewhere
 --]]
 local stdout = process.stdout.handle
 process.stdout.handle = fs.createWriteStream('/dev/null', {flags = 'a'})
@@ -17,7 +20,7 @@ _G.log = require('./util/log.lua')("main.log")
 process.stdout.handle = stdout
 
 --[[
-start bot using key read from the file
+    start bot using key read from the file
 ]]
 local function startBot(err, key)
 
@@ -31,6 +34,10 @@ local function startBot(err, key)
     client:run('Bot ' .. key)
 end
 
+--[[
+    gets triggered when the Discordia client is connected and ready
+    basically THE function that sets up the bot
+]]
 client:on('ready', function()
     log.info(0, 'Client ready')
     client:setUsername("BooksAndTea-Bot")
@@ -46,22 +53,16 @@ client:on('ready', function()
     log.info(0, 'Starting command loader')
     settings = {
         emitter = emitter,
-        folder = "src/commands"
+        folder = "src/modules"
     }
     commandLoader.start(settings)
     log.print(2, 'Done')
 
-    commandLoader.loadCommand("src/commands/ping.lua")
+    log.info(0, 'BOOT FINISHED')
 end)
 
+--[[
+    ACTUAL ENTRY POINT FOR THE PROGRAM
+    reads the keyfile and calls startBot with its contents
+]]
 fs.readFile(keyfile, startBot)
-
-    -- print('loading commands')
-    --fs.readdir('./commands', commandLoader.setupCommands)
--- local commandLoader = require("./commandLoader.lua")
--- local mH = require('messageHandler').init(commandLoader.optionList)
---_G.trackedMessages = mH.trackedMessages
---if err ~= nil then
-    --print(err)
-    --return
---end

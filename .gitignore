@@ -1,7 +1,11 @@
 *.key
 *log
-gateway.json
 *.exe
+
+gateway.json
 lit
 luvi
 luvit
+
+deps/
+.vscode/

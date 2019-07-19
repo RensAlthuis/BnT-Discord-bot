@@ -1,18 +1,20 @@
 local pathLib = require("path")
+local fs = require("fs")
 local _settings = {}
 local modules = {}
+local env = {}
 
 local moduleLoader = require('./util/moduleLoader.lua')
-local fs = require("fs")
 
 local function start(settings)
     _settings = settings
 
     if settings.folder then
-        local env = {
+        env = {
             log = log,
             emitter = _settings.emitter,
-            print=print
+            print = print,
+            require = require
         }
 
         modules = moduleLoader.loadFolder(settings.folder, env)
@@ -21,17 +23,11 @@ local function start(settings)
             v.start()
         end
     end
-
 end
 
 local function loadCommand(path)
     local filename = pathLib.basename(path, "")
     log.info(0, "Loading command module:", filename)
-
-    local env = {
-        log = log,
-        emitter = _settings.emitter
-    }
 
     local mod = moduleLoader.load(path, env)
     if mod == nil then

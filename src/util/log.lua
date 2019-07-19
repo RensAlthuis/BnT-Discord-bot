@@ -27,6 +27,10 @@ local function info(indent, ...)
     print(indent, "[INFO]", ...)
 end
 
+local function debug(indent, ...)
+    print(indent, "[DEBUG]", ...)
+end
+
 local function err(indent, ...)
     print(indent, "[ERR]", ...)
 end
@@ -47,6 +51,7 @@ return {
     print = print,
     info = info,
     err = err,
+    debug = debug,
     tprint = tprint
 }
 

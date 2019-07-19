@@ -3,8 +3,8 @@ local Emitter = require('core').Emitter
 local emitter = Emitter:new()
 
 --[[
-parses messages and returns the command with its content
-returns falses otherwise
+    parses messages and returns the command with its content
+    returns falses otherwise
 ]]
 local function parseMessage(message)
     local marker = string.sub(message.content, 0, 1)
@@ -63,6 +63,7 @@ end
 
 --[[
     gets triggered if any message is edited
+    TODO: fix marker events should only trigger if this was a previously marked message
 ]]
 local function onUpdate(message)
     message._handler = onUpdate

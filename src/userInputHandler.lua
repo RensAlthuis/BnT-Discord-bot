@@ -1,4 +1,3 @@
-local fs = require('fs')
 local moduleLoader = require('./util/moduleLoader.lua')
 local modules = {}
 
