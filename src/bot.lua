@@ -3,9 +3,6 @@ local fs = require('fs')
 --TODO: keyfile should load from json settings file
 local keyfile = args[2]
 
-local messageHandler = require('./messageHandler.lua')
-local commandLoader = require('./commandLoader.lua')
-
 --[[
     Loading discordia framework
     temporarily overwrites stdout so discordia won't flood it with messages
@@ -19,6 +16,8 @@ _G.client = discordia.Client { cacheAllMembers = true, }
 _G.log = require('./util/log.lua')("main.log")
 process.stdout.handle = stdout
 
+local messageHandler = require('./messageHandler.lua')
+local commandLoader = require('./commandLoader.lua')
 --[[
     start bot using key read from the file
 ]]

@@ -2,7 +2,6 @@ local fs = require('fs')
 local libpath = require('path')
 
 local xml = require('xmlSimple.lua').newParser()
-print("SDFSDFSDDSF", xml)
 
 function shallowcopy(orig)
     local orig_type = type(orig)
@@ -25,11 +24,9 @@ end
     TODO: maybe give some default functions/variables that every module might need to the environment
 ]]
 local function load(path, env)
-    print("DSLKFJDLSKFJ", module)
-    env._G = env
+    env._G = _G
     env.pairs = pairs
     env.string = string
-    env.module = module
 
     local stat = fs.statSync(path)
     if not stat then

@@ -14,7 +14,8 @@ local function start(settings)
             log = log,
             emitter = _settings.emitter,
             print = print,
-            require = require
+            require = require,
+            client = client
         }
 
         modules = moduleLoader.loadFolder(settings.folder, env)
@@ -27,7 +28,7 @@ end
 
 local function loadCommand(path)
     local filename = pathLib.basename(path, "")
-    log.info(0, "Loading command module:", filename)
+log.info(0, "Loading module:", filename)
 
     local mod = moduleLoader.load(path, env)
     if mod == nil then

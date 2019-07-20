@@ -1,9 +1,12 @@
 local https = require("https")
 local io = require("io")
 local xml = require('xmlSimple.lua').newParser()
+local coroutine = require('coroutine')
 
 local key = ""
 local baseUrl = ""
+
+client = _G.client
 
 --process the result
 local function parseResult(response)
@@ -25,34 +28,25 @@ local function parseResult(response)
         log.info(0, "Couldn't find book")
         return nil
     end
-
-    log.info(0, 'Book found with ID:', bookid)
     return bookid
 end
 
-local function GoodreadsRequest(searchString, message)
-        log.info(0, "Sending request to Goodreads")
-        log.print(2, "content:", searchString)
+local function GoodreadsRequest(searchString, callback)
+        log.print(2, "Sending request to Goodreads")
 
         local url = baseUrl .. searchString
         url = string.gsub(url, '%s', '+')
 
-        local fullResponse = ""
 
-        local req = https.get(baseUrl, function (res)
+        local req = https.get(url, function (res)
+            local fullResponse = ""
             res:on('data', function (chunk)
-                log.print(2, 'recieved chunk')
                 fullResponse = fullResponse .. chunk
             end)
 
             res:on('end', function()
-                log.print(2, "end of request")
                 bookid = parseResult(fullResponse)
-                if bookid == nil then
-                    message.channel.send("Not found")
-                else
-                    message.channel.send("ID = " .. bookid)
-                end
+                coroutine.wrap(callback)(bookid)
             end)
         end)
 
@@ -60,16 +54,61 @@ local function GoodreadsRequest(searchString, message)
 end
 
 local function onCreate(option, content, message)
-    log.info(0, "ONCREATE")
-    GoodreadsRequest(content, message)
+    log.info(0, "create_GR: " .. content)
+    GoodreadsRequest(content, function(bookid)
+        if bookid then
+            log.print(2, "Found book with id: " .. bookid)
+            message.channel:send("https://www.goodreads.com/book/show/" .. bookid)
+        else
+            message.channel:send("Not found")
+        end
+    end)
 end
 
 local function onUpdate(option, content, message)
+    log.info(0, 'update_GR: ' .. content)
 
+    local res = message.channel:getMessagesAfter(message, 1)
+    local mess = nil
+
+    for v in res:iter() do
+        mess = v
+    end
+
+    if mess then
+        if mess.author.name == client.user.username then
+            message:setContent("requesting new book")
+            GoodreadsRequest(content, function(bookid)
+                if bookid then
+                    mess:setContent("https://www.goodreads.com/book/show/" .. bookid)
+                else
+                    mess:setContent("No results found")
+                end
+            end)
+        else
+            log.print(2, 'no message found')
+        end
+    else
+        log.print(2, 'no message found')
+    end
 end
 
 local function onDelete(option, content, message)
+    log.info(0, 'delete_GR: ' .. content)
+    local res = message.channel:getMessagesAfter(message, 1)
+    local mess = nil
 
+    for v in res:iter() do
+        mess = v
+    end
+
+    if mess == nil then
+        log.info(0, 'No message found')
+    else
+        if mess.author.name == client.user.username then
+            mess.delete(mess)
+        end
+    end
 end
 
 function start()
