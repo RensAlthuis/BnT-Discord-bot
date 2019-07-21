@@ -80,6 +80,7 @@ local function onUpdate(option, content, message)
             message:setContent("requesting new book")
             GoodreadsRequest(content, function(bookid)
                 if bookid then
+                    log.print(2, "Found book with id: " .. bookid)
                     mess:setContent("https://www.goodreads.com/book/show/" .. bookid)
                 else
                     mess:setContent("No results found")

@@ -23,7 +23,8 @@ end
 
     TODO: maybe give some default functions/variables that every module might need to the environment
 ]]
-local function load(path, env)
+local function load(path, environment)
+    local env = shallowcopy(environment)
     env._G = _G
     env.pairs = pairs
     env.string = string
@@ -76,8 +77,7 @@ local function loadFolder(path, env)
 
     local modules = {}
     for k,v in pairs(files) do
-        envCopy = shallowcopy(env)
-        local mod = load(path .. '/' .. v, envCopy)
+        local mod = load(path .. '/' .. v, env)
         if mod ~= nil then
             modules[v] = mod
         end
