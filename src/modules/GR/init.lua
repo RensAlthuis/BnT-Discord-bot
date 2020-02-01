@@ -137,7 +137,7 @@ function start()
 
     local keyfile, err = io.open(PATH .. "GR.key", "r")
     key = keyfile:read()
-    baseUrl = "https://www.ggggoodreads.com" .. "/search.xml?key=" .. key .. "&q="
+    baseUrl = "https://www.goodreads.com" .. "/search.xml?key=" .. key .. "&q="
 end
 
 function stop()
