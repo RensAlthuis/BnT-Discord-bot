@@ -26,7 +26,6 @@ end
 
 function start()
     birthdays = jsonRead()
-    log.debug(0, "BIRTHDAYS")
     print(birthdays)
 
     emitter:on("create_newBirthday", newBirthday)

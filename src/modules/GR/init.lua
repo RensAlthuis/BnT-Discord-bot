@@ -31,7 +31,11 @@ local function parseResult(response)
     return bookid
 end
 
-local function GoodreadsRequest(searchString, callback)
+
+--[[
+    TODO: Hardcoded Timeout of 5 seconds (SORRY, i'll fix this someday)
+]]
+local function GoodreadsRequest(message, searchString, callback)
 
         local url = baseUrl .. searchString
         url = string.gsub(url, '%s', '+')
@@ -48,13 +52,29 @@ local function GoodreadsRequest(searchString, callback)
                 bookid = parseResult(fullResponse)
                 coroutine.wrap(callback)(bookid)
             end)
+
+        end)
+
+        req:setTimeout(5000, function()
+            req:destroy()
+            log.err(0, "Timeout on request to: " .. url)
+            coroutine.wrap (function ()
+                message.channel:send("Timeout while requesting information, Goodreads might be offline. If it is not, I guess you could contact your admins?")
+            end)()
+        end)
+
+        req:on('error', function(e)
+            log.err(0, "Unknown error on goodreads request: " .. e)
+            coroutine.wrap (function ()
+                message.channel:send("Unknown error while requesting information from goodreads... not sure what you did to get this answer but please tell my creator about it!") 
+            end)()
         end)
 
         req:done()
 end
 
 local function onCreate(option, content, message)
-    GoodreadsRequest(content, function(bookid)
+    GoodreadsRequest(message, content, function(bookid)
         if bookid then
             log.info(0, "Posting result - From: " .. message.author.name .. ", Request: " .. content .. ", Result: " .. bookid)
             message.channel:send("https://www.goodreads.com/book/show/" .. bookid)
@@ -76,7 +96,7 @@ local function onUpdate(option, content, message)
     if mess then
         if mess.author.name == client.user.username then
             message:setContent("requesting new book")
-            GoodreadsRequest(content, function(bookid)
+            GoodreadsRequest(message, content, function(bookid)
                 if bookid then
                     log.info(0, "Updating result - From: " .. message.author.name .. ", Request: " .. content .. ", Result: " .. bookid)
                     mess:setContent("https://www.goodreads.com/book/show/" .. bookid)
@@ -117,7 +137,7 @@ function start()
 
     local keyfile, err = io.open(PATH .. "GR.key", "r")
     key = keyfile:read()
-    baseUrl = "https://www.goodreads.com" .. "/search.xml?key=" .. key .. "&q="
+    baseUrl = "https://www.ggggoodreads.com" .. "/search.xml?key=" .. key .. "&q="
 end
 
 function stop()
