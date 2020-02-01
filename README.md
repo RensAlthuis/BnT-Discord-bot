@@ -1,6 +1,6 @@
 # BnT-Discord-bot
 BnT bot was made for the BooksAndTea discord server. If you like books you are most welcome to join (just google us!)<br/>
-If you just like the functionality, feel free to host a copy of the bot on your own. Although the code is a work in progress, expect bugs.
+If you just like the functionality, feel free to host a copy of the bot on your own. The code is a work in progress, expect bugs.
 
 ## How to Use
 Based on SinisterRectus' Discordia API: https://github.com/SinisterRectus/Discordia
