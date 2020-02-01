@@ -13,6 +13,11 @@ local env = {
             error = error,
 }
 
+--[[
+    Settings:
+        - emitter: Instance of SafeEmitter
+        - folder: Optional String of target folder holding modules
+]]
 local function start(settings)
     _settings = settings
     env.emitter = settings.emitter
@@ -29,6 +34,9 @@ local function start(settings)
     end
 end
 
+--[[
+    Load individual command and store it in the modules list
+]]
 local function loadCommand(path)
     local filename = pathLib.basename(path, "")
     log.info(0, "Loading module:", filename)

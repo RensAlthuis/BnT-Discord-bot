@@ -32,12 +32,12 @@ local function parseResult(response)
 end
 
 local function GoodreadsRequest(searchString, callback)
-        log.print(2, "Sending request to Goodreads")
 
         local url = baseUrl .. searchString
         url = string.gsub(url, '%s', '+')
 
 
+        log.print(3, "Sending request to Goodreads: " .. url)
         local req = https.get(url, function (res)
             local fullResponse = ""
             res:on('data', function (chunk)
@@ -54,10 +54,9 @@ local function GoodreadsRequest(searchString, callback)
 end
 
 local function onCreate(option, content, message)
-    log.info(0, "create_GR: " .. content)
     GoodreadsRequest(content, function(bookid)
         if bookid then
-            log.print(2, "Found book with id: " .. bookid)
+            log.info(0, "Posting result - From: " .. message.author.name .. ", Request: " .. content .. ", Result: " .. bookid)
             message.channel:send("https://www.goodreads.com/book/show/" .. bookid)
         else
             message.channel:send("Not found")
@@ -66,7 +65,6 @@ local function onCreate(option, content, message)
 end
 
 local function onUpdate(option, content, message)
-    log.info(0, 'update_GR: ' .. content)
 
     local res = message.channel:getMessagesAfter(message, 1)
     local mess = nil
@@ -80,22 +78,21 @@ local function onUpdate(option, content, message)
             message:setContent("requesting new book")
             GoodreadsRequest(content, function(bookid)
                 if bookid then
-                    log.print(2, "Found book with id: " .. bookid)
+                    log.info(0, "Updating result - From: " .. message.author.name .. ", Request: " .. content .. ", Result: " .. bookid)
                     mess:setContent("https://www.goodreads.com/book/show/" .. bookid)
                 else
                     mess:setContent("No results found")
                 end
             end)
         else
-            log.print(2, 'no message found')
+            log.print(3, 'no message found')
         end
     else
-        log.print(2, 'no message found')
+        log.print(3, 'no message found')
     end
 end
 
 local function onDelete(option, content, message)
-    log.info(0, 'delete_GR: ' .. content)
     local res = message.channel:getMessagesAfter(message, 1)
     local mess = nil
 
@@ -107,6 +104,7 @@ local function onDelete(option, content, message)
         log.info(0, 'No message found')
     else
         if mess.author.name == client.user.username then
+            log.info(0, "Removing result - From: " .. message.author.name .. "Content: " .. content)
             mess.delete(mess)
         end
     end

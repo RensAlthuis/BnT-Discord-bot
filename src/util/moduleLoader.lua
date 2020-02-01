@@ -59,7 +59,8 @@ local function load(path, environment)
 end
 
 --[[
-    load an entire folder at once
+    Load a folder by calling moduleLoader:Load() on each subfolder.
+    This is not a recursive function.
     returns a table where
         key:filename
         value:module

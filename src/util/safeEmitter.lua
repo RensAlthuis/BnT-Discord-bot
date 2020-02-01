@@ -8,7 +8,10 @@ local function pcallWrapper(handler, ...)
     end
 end
 
--- Emit a named event to all listeners with optional data argument(s).
+--[[
+    Emit a named event to all listeners with optional data argument(s).
+    Function is wrapped in a protected call that prints error message on failure.
+]]
 function SafeEmitter:emit(name, ...)
     local handlers = rawget(self, "handlers")
     if not handlers then

@@ -39,6 +39,7 @@ local function onCreate(message)
 
     ok, option, content = parseMessage(message)
     if ok then
+        log.info(0, "Command Recieved: " .. option .. " - From: " .. message.author.name .. " - Content: " .. content)
         emitter:emit("create_" .. option, option, content, message)
     end
 end
@@ -56,6 +57,7 @@ local function onDelete(message)
 
     ok, option, content = parseMessage(message)
     if ok then
+        log.info(0, "Command Removed: " .. option .. " - From: " .. message.author.name .. " - Content: " .. content)
         emitter:emit("delete_" .. option, option, content, message)
     end
 end
@@ -75,6 +77,7 @@ local function onUpdate(message)
 
     ok, option, content = parseMessage(message)
     if ok then
+        log.info(0, "Command Updated: " .. option .. " - From: " .. message.author.name .. " - Content: " .. content)
         emitter:emit("update_" .. option, option, content, message)
     end
 
@@ -87,6 +90,10 @@ local function onReactionAdd(reaction, userId)
     emitter:emit("reaction_add")
 end
 
+--[[
+    Settings:
+        - markers: list of strings, used that filter commands from regular messages
+]]
 local function start(settings)
     _settings = settings
 

@@ -18,6 +18,7 @@ process.stdout.handle = stdout
 
 local messageHandler = require('./messageHandler.lua')
 local commandLoader = require('./commandLoader.lua')
+
 --[[
     start bot using key read from the file
 ]]
@@ -61,7 +62,7 @@ client:on('ready', function()
 end)
 
 --[[
-    ACTUAL ENTRY POINT FOR THE PROGRAM
+    ENTRY POINT FOR THE PROGRAM
     reads the keyfile and calls startBot with its contents
 ]]
 fs.readFile(keyfile, startBot)
