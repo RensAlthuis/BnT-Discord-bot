@@ -13,8 +13,9 @@ Make sure it's all on 1 line and ends on a newline
 
 
 ### TODO
-- use json settings instead of keyfile, allowing for other options as well
 - Reimplement UI
 - Extract need for emitter from modules, prefer return list of functions/events
 - Key loader utility
-- Copy Log output to a file, with options for log length, separate errorlog, etc.
+- Add json settings
+- settings will allow for: max log length, separate errorlog, no more file Discord key, etc.
+- maybe some meta data for modules as a file?
