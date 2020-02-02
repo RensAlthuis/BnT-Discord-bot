@@ -17,10 +17,12 @@ local function parse()
     return results
 end
 
-local function sendRequest(content, callback)
+local function sendRequest(message, content, callback)
     host = "https://en.wikipedia.org"
-    url = host .. '/w/api.php?action=opensearch&limit=1&format=xml&search=' .. content
-    url = string.gsub(url, '%s', '+')
+    path = '/w/api.php?action=opensearch&limit=1&format=xml&search=' .. content
+    path = string.gsub(path, '%s', '+')
+    url = host .. path
+    log.debug(0, url)
 
     local req = https.get(url, function (res)
         response = ""
@@ -34,12 +36,27 @@ local function sendRequest(content, callback)
         end)
     end)
 
+    req:setTimeout(5000, function()
+        req:destroy()
+        log.err(0, "Timeout on request to: " .. url)
+        coroutine.wrap (function ()
+    	message.channel:send("Timeout while requesting information, Wikipedia is probably offline. If wikipedia is working normally maybe contact your admins?")
+        end)()
+    end)
+    
+    req:on('error', function(e)
+        log.err(0, "Unknown error on wiki request: " .. e)
+        coroutine.wrap (function ()
+    	message.channel:send("Unknown error while requesting information from wikipedia... please tell my creator this was error code: " .. e) 
+        end)()
+    end)
+
     req:done()
 end
 
 local function onCreate(option, content, message)
     log.info(0, "create_wiki: " .. content)
-    sendRequest(content, function(res)
+    sendRequest(message, content, function(res)
         if res then
             log.print(2, "Found page: " .. res)
             message.channel:send(res)
@@ -60,7 +77,7 @@ local function onUpdate()
 
     if mess then
         if mess.author.name == client.user.username then
-            sendRequest(content, function(res)
+            sendRequest(message, content, function(res)
                 if res then
                     log.print(2, "Found page: " .. res)
                     mess:setContent(res)

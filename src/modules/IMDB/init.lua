@@ -18,7 +18,7 @@ local function parse()
     return nil
 end
 
-local function sendRequest(content, callback)
+local function sendRequest(message, content, callback)
     host = "https://www.omdbapi.com/"
     url = host .. '?apikey=' .. key .. '&s=' .. content
     url = string.gsub(url, '%s', '+')
@@ -34,13 +34,27 @@ local function sendRequest(content, callback)
             coroutine.wrap(callback)("https://www.imdb.com/title/" .. res)
         end)
     end)
+    req:setTimeout(5000, function()
+        req:destroy()
+        log.err(0, "Timeout on request to: " .. url)
+        coroutine.wrap (function ()
+            message.channel:send("Timeout while requesting information, IMDB might be offline. If it is not, I guess you could contact your admins?")
+        end)()
+    end)
+
+    req:on('error', function(e)
+        log.err(0, "Unknown error on goodreads request: " .. e)
+        coroutine.wrap (function ()
+            message.channel:send("Unknown error while requesting information from IMDB... not sure what you did to get this answer but please tell my creator about it!") 
+        end)()
+    end)
 
     req:done()
 end
 
 local function onCreate(option, content, message)
     log.info(0, "create_imdb: " .. content)
-    sendRequest(content, function(res)
+    sendRequest(message, content, function(res)
         if res then
             log.print(2, "Found page: " .. res)
             message.channel:send(res)
@@ -61,7 +75,7 @@ local function onUpdate(option, content, message)
 
     if mess then
         if mess.author.name == client.user.username then
-            sendRequest(content, function(res)
+            sendRequest(message, content, function(res)
                 if res then
                     log.print(2, "Found page: " .. res)
                     mess:setContent(res)

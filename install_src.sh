@@ -29,5 +29,5 @@ return {
     newNode = newNode
 }
 " >> deps/xmlSimple.lua
-#rm deps/xmlSimple.lua.temp
+rm deps/xmlSimple.lua.temp
 

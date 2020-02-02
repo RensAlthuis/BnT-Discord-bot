@@ -26,13 +26,12 @@ end
 
 function start()
     birthdays = jsonRead()
-    print(birthdays)
 
-    emitter:on("create_newBirthday", newBirthday)
-    emitter:on("create_deleteBirthday", newBirthday)
+    #emitter:on("create_newBirthday", newBirthday)
+    #emitter:on("create_deleteBirthday", newBirthday)
 end
 
 function stop()
-    emitter:removeListener("create_newBirthday", newBirthday)
-    emitter:removeListener("create_deleteBirthday", newBirthday)
+    #emitter:removeListener("create_newBirthday", newBirthday)
+    #emitter:removeListener("create_deleteBirthday", newBirthday)
 end

@@ -28,6 +28,7 @@ local function load(path, environment)
     env._G = _G
     env.pairs = pairs
     env.string = string
+    env.type = type 
 
     local stat = fs.statSync(path)
     if not stat then
