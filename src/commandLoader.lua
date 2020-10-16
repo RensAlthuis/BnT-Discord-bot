@@ -10,7 +10,10 @@ local env = {
             require = require,
             client = client,
             tostring = tostring,
+	    tonumber = tonumber,
             error = error,
+	    discordia=discordia,
+            os_time=os.time,
 }
 
 --[[

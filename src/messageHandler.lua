@@ -87,7 +87,9 @@ end
     gets triggered if any reaction is added to a message
 ]]
 local function onReactionAdd(reaction, userId)
-    emitter:emit("reaction_add")
+    if userId ~= client.user.id then
+	    emitter:emit("reaction_add", reaction, userId)
+    end
 end
 
 --[[

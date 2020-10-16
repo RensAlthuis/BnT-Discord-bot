@@ -66,7 +66,7 @@ local function onCreate(option, content, message)
     end)
 end
 
-local function onUpdate()
+local function onUpdate(option, content, message)
     log.info(0, 'update_wiki: ' .. content)
 
     local res = message.channel:getMessagesAfter(message, 1)
@@ -93,7 +93,7 @@ local function onUpdate()
     end
 end
 
-local function onDelete()
+local function onDelete(option, content, message)
     log.info(0, 'delete_wiki: ' .. content)
     local res = message.channel:getMessagesAfter(message, 1)
     local mess = nil

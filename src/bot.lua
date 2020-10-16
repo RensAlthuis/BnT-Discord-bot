@@ -2,6 +2,7 @@ local fs = require('fs')
 
 --TODO: keyfile should load from json settings file
 local keyfile = args[2]
+local running = false;
 
 --[[
     Loading discordia framework
@@ -39,26 +40,29 @@ end
     basically THE function that sets up the bot
 ]]
 client:on('ready', function()
-    log.info(0, 'Client ready')
-    client:setUsername("BooksAndTea-Bot")
-    log.print(2, 'Logged in as: ' .. client.user.username .. '\n')
+    if running == false then
+	    log.info(0, 'Client ready')
+	    client:setUsername("BooksAndTea-Bot")
+	    log.print(2, 'Logged in as: ' .. client.user.username .. '\n')
 
-    log.info(0,'Starting message handler')
-    local settings = {
-        markers = {"!"}
-    }
-    emitter = messageHandler.start(settings)
-    log.print(2,'Done')
+	    log.info(0,'Starting message handler')
+	    local settings = {
+		markers = {"!"}
+	    }
+	    emitter = messageHandler.start(settings)
+	    log.print(2,'Done')
 
-    log.info(0, 'Starting command loader')
-    settings = {
-        emitter = emitter,
-        folder = "src/modules"
-    }
-    commandLoader.start(settings)
-    log.print(2, 'Done')
-
-    log.info(0, 'BOOT FINISHED')
+	    log.info(0, 'Starting command loader')
+	    settings = {
+		emitter = emitter,
+		folder = "src/modules"
+	    }
+	    commandLoader.start(settings)
+	    log.print(2, 'Done')
+	    
+	    running = true
+	    log.info(0, 'BOOT FINISHED')
+   end
 end)
 
 --[[
