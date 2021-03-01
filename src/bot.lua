@@ -40,8 +40,8 @@ end
     basically THE function that sets up the bot
 ]]
 client:on('ready', function()
+    log.info(0, 'Connection (re)established')
     if running == false then
-	    log.info(0, 'Client ready')
 	    client:setUsername("BooksAndTea-Bot")
 	    log.print(2, 'Logged in as: ' .. client.user.username .. '\n')
 
