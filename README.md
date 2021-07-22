@@ -6,7 +6,7 @@ If you just like the functionality, feel free to host a copy of the bot on your 
 Based on SinisterRectus' Discordia API: https://github.com/SinisterRectus/Discordia
 
 Run ``./install.sh``
-Run with: ``./luvit bot.lua keyfile``
+Start bot with: ``./luvit src/bot.lua keyfile``
 
 where keyfile is a file containing your bots client-secret.
 Make sure it's all on 1 line and ends on a newline
