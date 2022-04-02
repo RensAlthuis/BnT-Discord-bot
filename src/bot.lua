@@ -10,12 +10,12 @@ local running = false;
     alternative is setting logLevel to 0 but that would prevent the logfile from being created aswell
     and I do want to save those messages somewhere
 --]]
-local stdout = process.stdout.handle
-process.stdout.handle = fs.createWriteStream('/dev/null', {flags = 'a'})
+--local stdout = process.stdout.handle
+--process.stdout.handle = fs.createWriteStream('/dev/null', {flags = 'a'})
 _G.discordia = require('discordia')
-_G.client = discordia.Client { cacheAllMembers = true, }
+_G.client = discordia.Client()
 _G.log = require('./util/log.lua')("main.log")
-process.stdout.handle = stdout
+--process.stdout.handle = stdout
 
 local messageHandler = require('./messageHandler.lua')
 local commandLoader = require('./commandLoader.lua')
@@ -32,6 +32,7 @@ local function startBot(err, key)
     process.stdin:on("data", ui.onInput)
 
     log.info(0,'Starting Discordia client')
+    log.info(0,'Bot ' .. key)
     client:run('Bot ' .. key)
 end
 
@@ -69,4 +70,6 @@ end)
     ENTRY POINT FOR THE PROGRAM
     reads the keyfile and calls startBot with its contents
 ]]
-fs.readFile(keyfile, startBot)
+--fs.readFile(keyfile, startBot)
+local key = io.open(keyfile):read()
+startBot(nil, key)
